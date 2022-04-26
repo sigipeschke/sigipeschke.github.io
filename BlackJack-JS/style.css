@@ -1,0 +1,295 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.table1 {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    right: 1%;
+    bottom: 1%;
+    border: 3px solid black;
+    border-radius: 3em;
+    background-color: saddlebrown;
+}
+
+.game-title {
+    position: relative;
+    margin: 0;
+    top: 0.5%;
+    height: 5%;
+    left: 40%;
+    width: 20%;
+    text-align: center;
+    font-size: 5vmin;
+    white-space: nowrap;
+}
+
+.table2 {
+    position: absolute;
+    top: 7%;
+    left: 5%;
+    right: 5%;
+    bottom: 7%;
+    border: 2px solid black;
+    border-radius: 3em;
+    background-color: rgb(12, 150, 12);
+}
+
+.table3 {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 11%;
+    border: 10px solid white;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.game-board {
+    position: absolute;
+    top: 0%;
+    left: 5%;
+    height: 100%;
+    width: 90%;
+    margin: 0;
+    padding: 1rem;
+}
+
+.deal-deck {
+    position: relative;
+    top: 5%;
+    left: 90%;
+    height: 14vmin;
+    width: 10vmin;
+    border: 3px solid white;
+    border-radius: 0.2rem;
+    background-color: white;
+    
+    background-image: url(./images/card-back-red.svg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.play-card-slot-0 {
+    position: relative;
+    top: 25%;
+    left: 46.5%;
+    height: 14vmin;
+    width: 10vmin;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-card-sec {
+    position: relative;
+    top: 35%;
+    display: grid;
+    grid-template-columns: repeat(5, 10vmin);
+    grid-template-rows: 14vmin;
+    justify-content: space-between;
+}
+
+.card-slot {
+    position: relative;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-card-slot-1 {
+    top: -8vmin;
+    left: 4vmin;
+}
+.play-card-slot-2 {
+    top: 8vmin;
+    left: -2vmin;
+}
+.play-card-slot-3 {
+    top: 14vmin;
+}
+.play-card-slot-4 {
+    top: 8vmin;
+}
+.play-card-slot-5 {
+    top: -8vmin;
+    left: -6vmin;
+}
+
+.hand {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 10vmin;
+    list-style-type: none;
+}
+
+.hand li {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+.hand li:nth-child(2) {
+    left: calc( (11vmin / var(--hand-size)));
+    top: -4vmin;
+    z-index: 102;
+}
+.hand li:nth-child(3) {
+    left: calc( (11vmin / var(--hand-size)) * 2 );
+    top: -8vmin;
+    z-index: 103;
+}
+.hand li:nth-child(4) {
+    left: calc( (11vmin / var(--hand-size)) * 3 );
+    top: -12vmin;
+    z-index: 104;
+}
+.hand li:nth-child(5) {
+    left: calc( (11vmin / var(--hand-size)) * 4 );
+    top: -16vmin;
+    z-index: 105;
+}
+.hand li:nth-child(6) {
+    left: calc( (11vmin / var(--hand-size)) * 5 );
+    top: -20vmin;
+    z-index: 106;
+}
+.hand li:nth-child(7) {
+    left: calc( (11vmin / var(--hand-size)) * 6 );
+    top: -24vmin;
+    z-index: 107;
+}
+.hand li:nth-child(8) {
+    left: calc( (11vmin / var(--hand-size)) * 7 );
+    top: -28vmin;
+    z-index: 108;
+}
+
+.card {
+    height: 14vmin;
+    width: 10vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.2rem;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.bet-sec {
+    position: relative;
+    top: 50%;
+    height: 10%;
+    display: grid;
+    grid-template-columns: repeat(5, 10vmin);
+    grid-template-rows: 14vmin;
+    justify-content: space-between;
+}
+
+.bet-slot {
+    position: relative;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 8vmin;
+    width: 8vmin;
+    border: 1px solid white;
+    border-radius: 5em;
+}
+
+.bet-slot-1 {
+    top: -12vmin;
+    left: 0;
+}
+.bet-slot-2 {
+    top: 0;
+    left: -5vmin;
+}
+.bet-slot-3 {
+    top: 5.2vmin;
+}
+.bet-slot-4 {
+    top: 0;
+    left: 6vmin;
+}
+.bet-slot-5 {
+    top: -12vmin;
+    left: 2vmin;
+}
+
+.play-options {
+    position: relative;
+    top: 89%;
+    left: 10%;
+    height: 5%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 10% 40% 40% 10%;
+    grid-template-rows: 100%;
+    grid-column-gap: 5%;
+    justify-content: center;
+    align-items: center;
+}
+
+.active-player-text {
+    position: relative;
+    white-space: nowrap;
+    margin: 0;
+    font-size: 4vmin;
+}
+
+.hit-btn {
+    position: relative;
+    height: 100%;
+    width: 70%;
+    left: 30%;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 2rem;
+    background-color: rgb(92, 233, 111);
+    font-size: 3vmin;
+    cursor: pointer;
+}
+
+.stand-btn {
+    position: relative;
+    height: 100%;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 2rem;
+    background-color: rgb(240, 139, 125);
+    font-size: 3vmin;
+    cursor: pointer;
+}
+
+.deal-btn {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 2rem;
+    background-color: rgb(125, 240, 234);
+    font-size: 3vmin;
+    cursor: pointer;
+}

@@ -286,7 +286,7 @@ section {
 
     .games-section {
         display: grid;
-        grid-template-columns: repeat(3, 30%);
+        grid-template-columns: repeat(2, 30%);
         justify-content: center;
     
         .game {
