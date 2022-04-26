@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <title>Contact Siegfried Peschke</title>
+</head>
+<body>
+    <!--Navbar-->
+    <div id="nav-placeholder"></div>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script>$(function(){$("#nav-placeholder").load("navbar.html");});</script>
+
+    <section class = contact-section>
+        <h2>Contact</h2>
+        <div class="left-col">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" target="_blank">
+            <a href="https://www.facebook.com/sigipeschke/" class="fa fa-facebook" target="_blank"></a>
+            <a href="mailto: sigipeschke3@gmail.com" class="fa fa-google"></a>
+            <a href="https://www.linkedin.com/in/sigi-peschke-163b821a1/" class="fa fa-linkedin" target="_blank"></a>
+            <a href="https://www.instagram.com/sigipeschke/" class="fa fa-instagram" target="_blank"></a>
+        </div>
+        <div class="right-col">
+            <form action="">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email">
+
+                <label for="message">Message</label>
+                <textarea name="message" id="message" cols="30" rows="10"></textarea>
+
+                <input type="submit" class="send-message-cta" value="Send Message">
+            </form>
+        </div>
+    </section>
+</body>
+</html>

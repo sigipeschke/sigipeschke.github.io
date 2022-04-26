@@ -1,0 +1,85 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    background-color: rgb(219, 223, 201);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-size: 7.5vmin;
+}
+
+.header {
+    position: absolute;
+    top: 0%;
+    font-size: 4vmin;
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 0.5em;
+}
+
+.board {
+    position: absolute;
+    top: 20vmin;
+}
+
+#game-board {
+    display: grid;
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    background-color: rgb(250, 255, 221);
+    gap: var(--cell-gap);
+    padding: var(--cell-gap);
+    border-radius: 1vmin;
+    position: relative;
+}
+
+.cell {
+    color: black;
+    background-color: antiquewhite;
+    border-radius: 1vmin;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    padding: 25%;
+}
+
+.reset-sec {
+    position: absolute;
+    top: 88vmin;
+}
+
+#reset {
+    border-radius: 2em;
+    font-size: 2.5vmin;
+    font-weight: bold;
+    padding: 1vmin 2vmin;
+    background-color: rgb(255, 82, 82);
+    border-width: 0;
+    cursor: pointer;
+}
+
+.display {
+    position: absolute;
+    top: 13vmin;
+    background-color: green;
+    border-radius: 0.3em;
+    color: white;
+    width: 30vmin;
+    padding: 1vmin 0;
+    font-size: 4vmin;
+    font-weight: bold;
+    text-align: center;
+    z-index: 999;
+}
+
+.hide {
+    display: none;
+}
+

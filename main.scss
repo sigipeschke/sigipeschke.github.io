@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;700&display=swap');
+
+:root {
+    --primary_color: #007AF3;
+}
+
+.navbar {
+    background: #F2F2F2;
+    padding: 1em;
+
+    .container {
+        display: flex;
+        place-content: space-between;
+        margin-bottom: 0;
+    }
+    
+    .logo {
+        text-decoration: none;
+        font-size: 2em;
+        font-weight: bold;
+        color: black;
+        span {color: var(--primary_color);}
+    }
+
+    .mobile-menu-open {
+        cursor: pointer;
+        width: 2em;
+        margin: 0.5em;
+    }
+
+    nav.menu-btn {
+        display: block;
+    }
+
+    .mobile-menu-txt {
+        font-weight: bold;
+        float: left;
+        font-size: 1.2em;
+        margin: 0.5em 0;
+        padding: 0;
+    }
+    
+    nav {
+        display: none;
+        text-align: right;
+        background: var(--primary_color);
+        position: absolute;
+        z-index: 998;
+        width: 15%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        padding: 1em;
+    
+        .mobile-menu-exit {
+            cursor: pointer;
+            width: 2em;
+            margin: 0.5em;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            a {
+                font-size: 1.2em;
+                color: white;
+                text-decoration: none;
+                display: block;
+                padding: 0.5em 0.2em;
+    
+                &:hover {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .mobile-menu-open, .mobile-menu-exit, .mobile-menu-txt {
+        display: none;
+    }
+
+    .navbar {
+        .containter {
+            display: grid;
+            grid-template-columns: 350px auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            background: none;
+            position: right;
+            height: auto;
+            width: auto;
+            margin-top: 1em;
+            padding: 0 1em;
+
+            ul {
+                display: flex;
+            }
+
+            li {
+                a {
+                    color: black;
+                    padding: 0.5em 1em;
+                }
+            }
+        }
+    }
+}
+
+body {
+   background: white; 
+   margin: 0;
+   font-family: 'Poppins';
+}
+
+section {
+    padding: 2em 2em;
+}
+
+.hero {
+    text-align: center;
+
+    h1 {
+        font-size: 4em;
+        margin-bottom: 0.2em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+        font-weight: 100;
+        margin-top: 0.2em;
+    }
+
+    .subhead {
+        text-align: left;
+    }
+}
+
+.contact-section {
+    //text-align: center;
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .left-col {
+        .fa {
+            padding: 1em;
+            font-size: 1em;
+            width: 1em;
+            text-align: center;
+            text-decoration: none;
+            margin: 0.75;
+            border-radius: 50%;
+          }
+        
+        .fa:hover {
+            opacity: 0.7;
+        }
+        
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+          }
+        
+        .fa-google {
+            background: #dd4b39;
+            color: white;
+          }
+        
+        .fa-linkedin {
+            background: #007bb5;
+            color: white;
+          }
+        
+        .fa-instagram {
+            background: #125688;
+            color: white;
+          }
+    }
+
+    .right-col{
+        label {
+            display: block;
+            text-align: left;
+            font-size: 1.2em;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1em;
+            border: 1px solid gray;
+            border-radius: 0.3em;
+            box-sizing: border-box;
+        }
+
+        .send-message-cta {
+            background-color: var(--primary_color);
+            color: white;
+            font-size: 1em;
+            width: unset;
+            padding: 0.8em 2em;
+            text-align: center;
+            border: none;
+            border-radius: 5em;
+            cursor: pointer;
+        }
+    }
+}
+
+.portfolio-section {
+    display: inline-block;
+    justify-content: center;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    background-color: #F2F2F2;
+
+    h1 {
+        text-align: center;
+        font-size: 2.5em;
+        width: 100%;
+        background-color: var(--primary_color);
+        color: white;
+        margin: 0;
+    }
+
+    .sec-desc {
+        text-align: center;
+        font-size: 1.2em;
+        color: black;
+        width: 100%;
+        margin: 0.2em 0 0 0;
+    }
+
+    .presentations {
+        display: grid;
+        grid-template-columns: repeat(3, 30%);
+        grid-column-gap: 0.5em;
+        justify-content: center;
+
+        .pdf-pres {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: var(--primary_color);
+        }
+
+        .pres-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0.2em;
+            text-align: center;
+        }
+    }
+
+    .jupyter-notebooks {
+        display: grid;
+        grid-template-columns: repeat(4, 20%);
+        grid-row-gap: 1.5em;
+        justify-content: center;
+        justify-content: space-between;
+
+        .notebook {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: left;
+            text-decoration: none;
+            color: var(--primary_color);
+            padding: 0.2em;
+            margin: 0.2em;
+            border: 1px solid black;
+            border-radius: 0.5em;
+        }
+    }
+
+    .games-section {
+        display: grid;
+        grid-template-columns: repeat(3, 30%);
+        justify-content: center;
+    
+        .game {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 1%;
+            text-align: center;
+    
+            .game-title {
+                font-size: 1.8em;
+                font-weight: bold;
+                margin: 0.2em;
+            }
+            
+            img{
+                width: 95%;
+                height: 95%;
+                border-radius: 0.5em;
+            }
+    
+            .play-cta {
+                text-decoration: none;
+                cursor: pointer;
+                color: white;
+                background-color: var(--primary_color);
+                padding: 0.2em 0.8em;
+                border-radius: 5em;
+                width: 25%;
+            }
+    
+            .code-cta {
+                text-decoration: none;
+                cursor: pointer;
+                color: white;
+                background-color: rgb(107, 190, 107);
+                padding: 0.2em 0.8em;
+                border-radius: 5em;
+                width: 25%;
+            }
+        }
+    }
+}

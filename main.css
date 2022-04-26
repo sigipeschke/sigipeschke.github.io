@@ -1,0 +1,344 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;700&display=swap");
+:root {
+  --primary_color: #007AF3;
+}
+
+.navbar {
+  background: #F2F2F2;
+  padding: 1em;
+}
+
+.navbar .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-content: space-between;
+  margin-bottom: 0;
+}
+
+.navbar .logo {
+  text-decoration: none;
+  font-size: 2em;
+  font-weight: bold;
+  color: black;
+}
+
+.navbar .logo span {
+  color: var(--primary_color);
+}
+
+.navbar .mobile-menu-open {
+  cursor: pointer;
+  width: 2em;
+  margin: 0.5em;
+}
+
+.navbar nav.menu-btn {
+  display: block;
+}
+
+.navbar .mobile-menu-txt {
+  font-weight: bold;
+  float: left;
+  font-size: 1.2em;
+  margin: 0.5em 0;
+  padding: 0;
+}
+
+.navbar nav {
+  display: none;
+  text-align: right;
+  background: var(--primary_color);
+  position: absolute;
+  z-index: 998;
+  width: 15%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  padding: 1em;
+}
+
+.navbar nav .mobile-menu-exit {
+  cursor: pointer;
+  width: 2em;
+  margin: 0.5em;
+}
+
+.navbar nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar nav li a {
+  font-size: 1.2em;
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 0.5em 0.2em;
+}
+
+.navbar nav li a:hover {
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 768px) {
+  .mobile-menu-open, .mobile-menu-exit, .mobile-menu-txt {
+    display: none;
+  }
+  .navbar .containter {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 350px auto;
+        grid-template-columns: 350px auto;
+  }
+  .navbar nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    background: none;
+    position: right;
+    height: auto;
+    width: auto;
+    margin-top: 1em;
+    padding: 0 1em;
+  }
+  .navbar nav ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .navbar nav li a {
+    color: black;
+    padding: 0.5em 1em;
+  }
+}
+
+body {
+  background: white;
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+section {
+  padding: 2em 2em;
+}
+
+.hero {
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 4em;
+  margin-bottom: 0.2em;
+}
+
+.hero h2 {
+  font-size: 1.8em;
+  font-weight: 100;
+  margin-top: 0.2em;
+}
+
+.hero .subhead {
+  text-align: left;
+}
+
+.contact-section h2 {
+  font-size: 2em;
+}
+
+.contact-section .left-col .fa {
+  padding: 1em;
+  font-size: 1em;
+  width: 1em;
+  text-align: center;
+  text-decoration: none;
+  margin: 0.75;
+  border-radius: 50%;
+}
+
+.contact-section .left-col .fa:hover {
+  opacity: 0.7;
+}
+
+.contact-section .left-col .fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.contact-section .left-col .fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.contact-section .left-col .fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.contact-section .left-col .fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.contact-section .right-col label {
+  display: block;
+  text-align: left;
+  font-size: 1.2em;
+}
+
+.contact-section .right-col input, .contact-section .right-col textarea {
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 1px solid gray;
+  border-radius: 0.3em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.contact-section .right-col .send-message-cta {
+  background-color: var(--primary_color);
+  color: white;
+  font-size: 1em;
+  width: unset;
+  padding: 0.8em 2em;
+  text-align: center;
+  border: none;
+  border-radius: 5em;
+  cursor: pointer;
+}
+
+.portfolio-section {
+  display: inline-block;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  background-color: #F2F2F2;
+}
+
+.portfolio-section h1 {
+  text-align: center;
+  font-size: 2.5em;
+  width: 100%;
+  background-color: var(--primary_color);
+  color: white;
+  margin: 0;
+}
+
+.portfolio-section .sec-desc {
+  text-align: center;
+  font-size: 1.2em;
+  color: black;
+  width: 100%;
+  margin: 0.2em 0 0 0;
+}
+
+.portfolio-section .presentations {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (30%)[3];
+      grid-template-columns: repeat(3, 30%);
+  grid-column-gap: 0.5em;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.portfolio-section .presentations .pdf-pres {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: var(--primary_color);
+}
+
+.portfolio-section .presentations .pres-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.2em;
+  text-align: center;
+}
+
+.portfolio-section .jupyter-notebooks {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (20%)[4];
+      grid-template-columns: repeat(4, 20%);
+  grid-row-gap: 1.5em;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.portfolio-section .jupyter-notebooks .notebook {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: none;
+  color: var(--primary_color);
+  padding: 0.2em;
+  margin: 0.2em;
+  border: 1px solid black;
+  border-radius: 0.5em;
+}
+
+.portfolio-section .games-section {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (30%)[3];
+      grid-template-columns: repeat(3, 30%);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.portfolio-section .games-section .game {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1%;
+  text-align: center;
+}
+
+.portfolio-section .games-section .game .game-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 0.2em;
+}
+
+.portfolio-section .games-section .game img {
+  width: 95%;
+  height: 95%;
+  border-radius: 0.5em;
+}
+
+.portfolio-section .games-section .game .play-cta {
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  background-color: var(--primary_color);
+  padding: 0.2em 0.8em;
+  border-radius: 5em;
+  width: 25%;
+}
+
+.portfolio-section .games-section .game .code-cta {
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  background-color: #6bbe6b;
+  padding: 0.2em 0.8em;
+  border-radius: 5em;
+  width: 25%;
+}
+/*# sourceMappingURL=main.css.map */

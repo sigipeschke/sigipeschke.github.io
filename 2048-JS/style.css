@@ -1,0 +1,108 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    background-color: rgb(219, 223, 201);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-size: 7.5vmin;
+}
+
+.header {
+    position: absolute;
+    top: 0%;
+    font-size: 4vmin;
+    text-align: center;
+    width: 60vmin;
+}
+
+.title {
+    margin-bottom: 0.5em;
+}
+
+.game-stats {
+    font-size: 0.8em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-moves {
+    margin: 0;
+    width: 49.5%;
+    text-align: left;
+}
+
+.p-score {
+    margin: 0;
+    width: 49.5%;
+    text-align: right;
+}
+
+.board {
+    position: absolute;
+    top: 20vmin;
+}
+
+#game-board {
+    display: grid;
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    background-color: rgb(250, 255, 221);
+    gap: var(--cell-gap);
+    padding: var(--cell-gap);
+    border-radius: 1vmin;
+    position: relative;
+}
+
+.cell {
+    background-color: antiquewhite;
+    border-radius: 1vmin;
+}
+
+.tile {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 1vmin;
+    top: calc( var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap) );
+    left: calc( var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap) );
+    font-weight: bold;
+    font-size: 0.8em;
+    background-color: hsl(0, 50%, var(--background-lightness));
+    color: hsl(0, 25%, var(--text-lightness));
+    animation: show 200ms ease-in-out;
+    transition: 100ms ease-in-out;
+}
+
+.buttons {
+    display: inline-block;
+    position: absolute;
+    top: 90vmin;
+}
+
+.reset {
+    border-radius: 2em;
+    font-size: 2.5vmin;
+    font-weight: bold;
+    padding: 1vmin 2vmin;
+    color: black;
+    background-color: rgb(255, 82, 82);
+    border-width: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0.5;
+        transform: scale(0);
+    }
+}
