@@ -131,15 +131,24 @@ section {
   text-align: center;
 }
 
+.hero .container {
+  display: grid;
+  grid-template-columns: 50% 40%;
+  grid-column-gap: 5%;
+}
+
 .hero h1 {
-  font-size: 4em;
+  font-size: 5em;
   margin-bottom: 0.2em;
+  text-shadow: 4px 4px blue;
+  letter-spacing: 0.05rem;
 }
 
 .hero h2 {
   font-size: 1.8em;
-  font-weight: 100;
+  font-weight: 500;
   margin-top: 0.2em;
+  letter-spacing: 0.05rem;
 }
 
 .hero .contacts .fa {
@@ -169,8 +178,12 @@ section {
 
 .hero .subhead {
   text-align: left;
-  font-size: 1.2rem;
+  font-weight: 500;
+  font-size: 1.35rem;
   color: black;
+  line-height: 2.2;
+  letter-spacing: 0.05rem;
+  margin-top: 12%;
 }
 
 .resume-container {
