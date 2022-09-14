@@ -51,7 +51,7 @@
   background: var(--primary_color);
   position: absolute;
   z-index: 998;
-  width: 15%;
+  width: 16%;
   height: 100%;
   top: 0;
   right: 0;
@@ -117,6 +117,18 @@
   }
 }
 
+@media only screen and (min-width: 968px) {
+  .hero {
+    text-align: center;
+  }
+
+  .hero .container {
+    display: grid;
+    grid-template-columns: 50% 40%;
+    grid-column-gap: 5%;
+  }
+}
+
 body {
   background: white;
   margin: 0;
@@ -131,16 +143,10 @@ section {
   text-align: center;
 }
 
-.hero .container {
-  display: grid;
-  grid-template-columns: 50% 40%;
-  grid-column-gap: 5%;
-}
-
 .hero h1 {
   font-size: 5em;
   margin-bottom: 0.2em;
-  text-shadow: 4px 4px blue;
+  text-shadow: 4px 4px var(--primary_color);
   letter-spacing: 0.05rem;
 }
 
@@ -151,8 +157,18 @@ section {
   letter-spacing: 0.05rem;
 }
 
+.hero .subhead {
+  text-align: left;
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: black;
+  line-height: 2.2;
+  letter-spacing: 0.05rem;
+  margin-top: 12%;
+}
+
 .hero .contacts .fa {
-  padding: 1em;
+  padding: 1.5em;
   font-size: 1em;
   width: 1em;
   text-align: center;
@@ -174,16 +190,6 @@ section {
 .hero .contacts .fa-linkedin {
   background: #007bb5;
   color: white;
-}
-
-.hero .subhead {
-  text-align: left;
-  font-weight: 500;
-  font-size: 1.35rem;
-  color: black;
-  line-height: 2.2;
-  letter-spacing: 0.05rem;
-  margin-top: 12%;
 }
 
 .resume-container {
