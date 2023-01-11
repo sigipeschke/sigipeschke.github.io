@@ -167,6 +167,16 @@ section {
   margin-top: 12%;
 }
 
+.hero .about {
+  text-align: left;
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: black;
+  line-height: 2.2;
+  letter-spacing: 0.05rem;
+  padding: 0 10%;
+}
+
 .hero .contacts .fa {
   padding: 1.5em;
   font-size: 1em;

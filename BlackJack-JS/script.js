@@ -133,7 +133,7 @@ function startGame() {
     gameDeck = genDeck()
     //console.log(gameDeck)
     cut = (Math.random() * 15) + 60
-    playerList = genPlayers(5)
+    playerList = genPlayers()
     //console.log(playerList)
 }
 
@@ -154,10 +154,14 @@ function genDeck() {
 function genPlayers(num = 1) {
     let p = new Player(0)
     const playList = [p]
+    /*
     for (let i = 1; i <= num; i++) {
         p = new Player(i)
         playList.push(p)
     }
+    */
+    p = new Player(3)
+    playList.push(p)
     return playList
 }
 
@@ -187,8 +191,14 @@ function playerStand() {
 
 function endRound() {
     for (let p = playerList.length - 1; p > 0; p--) {
-        if (isRoundWinner(playerList[p])) {document.querySelector(".bet-slot-"+String(playerList[p].id)).setAttribute("style", "background-color: green;")}
-        else {document.querySelector(".bet-slot-"+String(playerList[p].id)).setAttribute("style", "background-color: red;")}
+        if (isRoundWinner(playerList[p])) {
+            document.querySelector(".bet-slot-"+String(playerList[p].id)).innerHTML = "W";
+            document.querySelector(".bet-slot-"+String(playerList[p].id)).setAttribute("style", "background-color: green;");
+        }
+        else {
+            document.querySelector(".bet-slot-"+String(playerList[p].id)).innerHTML = "L";
+            document.querySelector(".bet-slot-"+String(playerList[p].id)).setAttribute("style", "background-color: red;");
+        }
     }
 }
 
@@ -208,7 +218,8 @@ function clearBoard() {
         while (playerList[i].dirHTML.hasChildNodes()) {
             playerList[i].dirHTML.removeChild(playerList[i].dirHTML.firstChild)
             if (i != 0) {
-                document.querySelector(".bet-slot-"+String(playerList[i].id)).setAttribute("style", "background-color: none;")
+                document.querySelector(".bet-slot-"+String(playerList[i].id)).innerHTML = "";
+                document.querySelector(".bet-slot-"+String(playerList[i].id)).setAttribute("style", "background-color: none;");
             }
         }
     }
