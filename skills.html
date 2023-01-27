@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="icon" type="image/x-icon" href="/images/account_circle.ico">
+    <title>Siegfried Peschke - Skills</title>
+
+    <script src="./node_modules/pixi.js/dist/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
+</head>
+
+<body class="skills-page">
+    <!--Navbar-->
+    <div id="nav-placeholder"></div>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script>$(function(){$("#nav-placeholder").load("navbar.html");});</script>
+
+    <div class="pixi-container">
+        <script>
+            // PIXI Scene
+
+            const app = new PIXI.Application({
+                width: window.innerWidth,
+                height: window.innerHeight,
+                transparent: false,
+                antialias: true
+            });
+            app.renderer.background.color = 0x152238;
+            app.renderer.view.style.position = 'absolute';
+            document.body.appendChild(app.view);
+
+            // Star Field Background
+
+            const bgContainer = new PIXI.Container();
+            app.stage.addChild(bgContainer);
+
+            const starTexture = PIXI.Texture.from('./images/white-star.png');
+
+            let starAmount = 5000;
+            if (window.innerWidth < 769) {
+                const starAmount = 2000;
+            } 
+            let cameraZ = 0;
+            const fov = 30;
+            const baseSpeed = 0.05;
+            let speed = 0.1;
+            let warpSpeed = 0;
+            const starStretch = 5;
+            const starBaseSize = 0.0075;
+
+            // Create the stars
+            const stars = [];
+            for (let i = 0; i < starAmount; i++) {
+                const star = {
+                    sprite: new PIXI.Sprite(starTexture),
+                    z: 0,
+                    x: 0,
+                    y: 0,
+                };
+                star.sprite.anchor.x = 0.5;
+                star.sprite.anchor.y = 0.7;
+                randomizeStar(star, true);
+                bgContainer.addChild(star.sprite);
+                stars.push(star);
+            }
+
+            function randomizeStar(star, initial) {
+                star.z = initial ? Math.random() * 2000 : cameraZ + Math.random() * 1000 + 2000;
+                const deg = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 25 + 1;
+                star.x = Math.cos(deg) * 2*distance;
+                star.y = Math.sin(deg) * 2*distance;
+            }
+
+            // Change flight speed every 5 seconds
+            setInterval(() => {
+                warpSpeed = warpSpeed > 0 ? 0 : 0;
+            }, 5000);
+
+            // Listen for animate update
+            app.ticker.add((delta) => {
+                speed += (warpSpeed - speed) / 20;
+                cameraZ += delta * 10 * (speed + baseSpeed);
+                for (let i = 0; i < starAmount; i++) {
+                    const star = stars[i];
+                    if (star.z < cameraZ) randomizeStar(star);
+
+                    const z = star.z - cameraZ;
+                    star.sprite.x = star.x * (fov / z) * app.renderer.screen.width + app.renderer.screen.width / 2;
+                    star.sprite.y = star.y * (fov / z) * app.renderer.screen.width + app.renderer.screen.height / 2;
+
+                    const dxCenter = star.sprite.x - app.renderer.screen.width / 2;
+                    const dyCenter = star.sprite.y - app.renderer.screen.height / 2;
+                    const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
+                    const distanceScale = Math.max(0, (2000 - z) / 2000);
+                    star.sprite.scale.x = distanceScale * starBaseSize;
+
+                    star.sprite.scale.y = distanceScale * starBaseSize + distanceScale * speed * starStretch * distanceCenter / app.renderer.screen.width;
+                    star.sprite.rotation = Math.atan2(dyCenter, dxCenter) + Math.PI / 2;
+                }
+            });
+        </script>
+    </div>
+
+    <div class="hero">
+        <h1>My Skills</h1>
+        <p class="desc">
+            My technical skills are broad and include expertise in programming languages and frameworks such as Python, Java, Spring Boot, JavaScript, TypeScript, and Angular. 
+            <br><br>
+            I have experience in building web-based applications and an understanding of the full software development life cycle. Additionally, I have a strong interest in the power of machine learning and cloud computing and have hands-on experience with neural networks and TensorFlow.
+            <br><br>
+            Furthermore, I have specific experience in the field of computational physics which includes implementing numerical methods, developing models, simulating physical systems and analyzing the results. I have also gained experience in optimization techniques, parallel computing and handling large datasets.
+        </p>
+        <span class="skills-sphere"></span>
+    </div>
+    
+    <script>
+        const texts = [
+            'HTML', 'CSS', 
+            'JAVASCRIPT', 'PYTHON',
+            'ANGULAR', 'TYPESCRIPT', 
+            'JAVA', 'SPRING BOOT',
+            'MYSQL', 'JQUERY', 'BOOTSTRAP',
+            'THREE.JS', 'PIXI.JS', 'NODE.JS',
+            'NUMPY', 'SCIPY', 'PANDAS'
+        ];
+        
+        var width = window.innerWidth
+        const options = {
+            // Sphere radius in px
+            radius: width/5,
+
+            // Animation speed
+            // Slow, Normal, Fast
+            maxSpeed: 'fast',
+            initSpeed: 'fast',
+
+            // Rolling direction [0 (top) , 90 (left), 135 (right-bottom)] 
+            direction: 135,
+
+            // Interaction with mouse
+            keep: true
+        }
+        var skillsTagCloud = TagCloud('.skills-sphere', texts, options);
+    </script>
+</body>
+</html>

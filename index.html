@@ -6,40 +6,348 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./main.css">
     <link rel="icon" type="image/x-icon" href="/images/account_circle.ico">
-    <title>Siegfried Peschke - About Me</title>
+    <title>Siegfried Peschke - Portfolio</title>
+
+    <script src="./node_modules/three/build/three.js"></script>
 </head>
 
-<body>
-    <!--Navbar-->
-    <div id="nav-placeholder"></div>
-    <script src="//code.jquery.com/jquery.min.js"></script>
-    <script>$(function(){$("#nav-placeholder").load("navbar.html");});</script>
-
-    <section class="hero">
-        <div class="container">
-            <div>
-                <h1>Siegfried Peschke</h1>
-                <h2>Physicist &amp; Programmer</h2>
-                <div class="image">
-                    <img src="./images/profile_photo.png" alt="Profile Photo">
-                </div>
-
-                <div class="contacts">
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" target="_blank">
-                    <a href="mailto: sigipeschke3@gmail.com" class="fa fa-google"></a>
-                    <a href="https://github.com/sigipeschke" class="fa fa-github" target="_blank"></a>
-                    <a href="https://www.linkedin.com/in/sigi-peschke-163b821a1/" class="fa fa-linkedin" target="_blank"></a>
-                </div>
-            </div>
-
-            <p class="subhead">
-                I am a computer scientist with a background in physics and expertise in front-end development. 
-                <br><br>
-                I bring analytical thinking and a unique perspective to solving complex problems. 
-                <br><br>
-                I am passionate about technology and constantly strive to improve my skills and make a positive impact.
-            </p>
-        </div>
+<body class="home-page">
+    <section id="loading-screen">
+        <div id="loader"></div>
     </section>
+
+    <canvas class="webgl"></canvas>
+
+    <div id="enter-portfolio-div" class="home-page-intro">
+        <!--
+        <a href="./about.html"><img class="billboard" src="/images/home/billboard.png"></a>
+        -->
+    </div>
+    
+    <script>
+// Loading
+const loadingManager = new THREE.LoadingManager( () => {
+    const loadingScreen = document.getElementById( 'loading-screen' )
+    loadingScreen.classList.add( 'fade-out' )
+    loadingScreen.addEventListener( 'transitionend', onTransitionEnd )
+})
+
+function onTransitionEnd( event ) {
+    event.target.remove();
+    
+    const enterCTA = document.createElement('a')
+    enterCTA.setAttribute('href', './about.html')
+
+    const enterIMG = document.createElement('img')
+    enterIMG.setAttribute('class', 'billboard')
+    enterIMG.setAttribute('src', '/images/home/billboard.png')
+
+    enterCTA.appendChild(enterIMG)
+
+    enterDIV = document.getElementById('enter-portfolio-div')
+    enterDIV.appendChild(enterCTA)
+}
+
+// Load Textures
+const textureLoader = new THREE.TextureLoader(loadingManager)
+
+const bgTexture = textureLoader.load('/images/home/milky-way.jpg')
+
+const sunTexture = textureLoader.load('/images/home/textures/sun-texture.jpg')
+const sunMap = textureLoader.load('/images/home/textures/sun-map.jpg')
+
+const mercuryTexture = textureLoader.load('/images/home/textures/mercury-texture.jpg')
+const mercuryMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+
+const venusTexture = textureLoader.load('/images/home/textures/venus-texture.jpg')
+const venusMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+
+const earthTexture = textureLoader.load('/images/home/textures/earth-texture.jpg')
+const earthMap = textureLoader.load('/images/home/textures/earth-map.jpg')
+
+const moonTexture = textureLoader.load('/images/home/textures/moon-texture.jpg')
+const moonMap = textureLoader.load('/images/home/textures/moon-map.jpg')
+
+const marsTexture = textureLoader.load('/images/home/textures/mars-texture.jpg')
+const marsMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+
+const jupiterTexture = textureLoader.load('/images/home/textures/jupiter-texture.jpg')
+const jupiterMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+
+const saturnTexture = textureLoader.load('/images/home/textures/saturn-texture.jpg')
+const saturnMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+const saturnRingTexture = textureLoader.load('/images/home/textures/saturn-ring-texture.png')
+saturnRingTexture.rotation = Math.PI / 2
+
+const uranusTexture = textureLoader.load('/images/home/textures/uranus-texture.jpg')
+const uranusMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+
+const neptuneTexture = textureLoader.load('/images/home/textures/neptune-texture.jpg')
+const neptuneMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+
+const astromanTexture = textureLoader.load('/images/home/astro-rocket.png')
+
+// Canvas
+const canvas = document.querySelector('canvas.webgl')
+
+// Scene
+const scene = new THREE.Scene()
+scene.background = bgTexture
+
+
+// Objects
+const sunGeo = new THREE.SphereGeometry(10, 64, 64)
+const mercuryGeo = new THREE.SphereGeometry(1.5, 64, 64)
+const venusGeo = new THREE.SphereGeometry(3.8, 64, 64)
+const earthGeo = new THREE.SphereGeometry(4, 64, 64)
+const marsGeo = new THREE.SphereGeometry(2.2, 64, 64)
+const jupiterGeo = new THREE.SphereGeometry(8, 64, 64)
+const saturnGeo = new THREE.SphereGeometry(7, 64, 64)
+const saturnRingGeo = new THREE.TorusGeometry(12, 1.4, 2, 64)
+const uranusGeo = new THREE.SphereGeometry(5.5, 64, 64)
+const neptuneGeo = new THREE.SphereGeometry(5, 64, 64)
+
+
+// Materials
+
+const sunMat = new THREE.MeshStandardMaterial()
+sunMat.map = sunTexture
+sunMat.normalMap = sunMap
+
+const mercuryMat = new THREE.MeshStandardMaterial()
+mercuryMat.map = mercuryTexture
+mercuryMat.normalMap = mercuryMap
+
+const venusMat = new THREE.MeshStandardMaterial()
+venusMat.map = venusTexture
+venusMat.normalMap = venusMap
+
+const earthMat = new THREE.MeshStandardMaterial()
+earthMat.map = earthTexture
+earthMat.normalMap = earthMap
+
+const moonMat = new THREE.MeshStandardMaterial()
+moonMat.map = moonTexture
+moonMat.normalMap = moonMap
+
+const marsMat = new THREE.MeshStandardMaterial()
+marsMat.map = marsTexture
+marsMat.normalMap = marsMap
+
+const jupiterMat = new THREE.MeshStandardMaterial()
+jupiterMat.map = jupiterTexture
+jupiterMat.normalMap = jupiterMap
+
+const saturnMat = new THREE.MeshStandardMaterial()
+saturnMat.map = saturnTexture
+saturnMat.normalMap = saturnMap
+
+const saturnRingMat = new THREE.MeshStandardMaterial()
+saturnRingMat.map = saturnRingTexture
+
+const uranusMat = new THREE.MeshStandardMaterial()
+uranusMat.map = uranusTexture
+uranusMat.normalMap = uranusMap
+
+const neptuneMat = new THREE.MeshStandardMaterial()
+neptuneMat.map = neptuneTexture
+neptuneMat.normalMap = neptuneMap
+
+const astromanMat = new THREE.SpriteMaterial({
+    map: astromanTexture,
+    sizeAttenuation: false
+})
+
+
+// Mesh
+const sun = new THREE.Mesh(sunGeo, sunMat)
+sun.position.set(0, 0, 0)
+scene.add(sun)
+
+const mercury = new THREE.Mesh(mercuryGeo, mercuryMat)
+mercury.position.set(15, 0, 0)
+scene.add(mercury)
+
+const venus = new THREE.Mesh(venusGeo, venusMat)
+venus.position.set(25, 0, 0)
+scene.add(venus)
+
+const earth = new THREE.Mesh(earthGeo, earthMat)
+earth.position.set(40, 0, 0)
+scene.add(earth)
+
+const mars = new THREE.Mesh(marsGeo, marsMat)
+mars.position.set(55, 0, 0)
+scene.add(mars)
+
+const jupiter = new THREE.Mesh(jupiterGeo, jupiterMat)
+jupiter.position.set(75, 0, 0)
+scene.add(jupiter)
+
+const saturn = new THREE.Mesh(saturnGeo, saturnMat)
+saturn.position.set(100, 0, 0)
+scene.add(saturn)
+
+const saturnRing = new THREE.Mesh(saturnRingGeo, saturnRingMat)
+saturnRing.position.set(100, 0, 0)
+saturnRing.rotateX(110 * Math.PI / 180)
+scene.add(saturnRing)
+
+const uranus = new THREE.Mesh(uranusGeo, uranusMat)
+uranus.position.set(135, 0, 0)
+scene.add(uranus)
+
+const neptune = new THREE.Mesh(neptuneGeo, neptuneMat)
+neptune.position.set(155, 0, 0)
+scene.add(neptune)
+
+const astroman = new THREE.Sprite(astromanMat)
+astroman.scale.set(0.25, 0.25, 1)
+astroman.position.set(4, 60, 135)
+scene.add(astroman)
+
+// Lights
+
+const light = new THREE.AmbientLight(0x404040, 4)
+scene.add(light)
+
+/**
+ * Sizes
+ */
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
+
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+/**
+ * Camera
+ */
+// Base camera
+const camera = new THREE.PerspectiveCamera(90, sizes.width / sizes.height, 1, 1000)
+camera.position.set(0, 60, 140)
+camera.lookAt(0, 0, 0)
+scene.add(camera)
+
+// Controls
+// const controls = new OrbitControls(camera, canvas)
+// controls.enableDamping = true
+
+/**
+ * Renderer
+ */
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas
+})
+renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+/**
+ * Animate
+ */
+
+let thetaMe = 0.0
+let thetaV = 3.5
+let thetaE = 1.0
+let thetaMa = 1.8
+let thetaJ = 6.0
+let thetaS = 3.5
+let thetaU = 0.0
+let thetaN = 5.8
+
+document.addEventListener('mousemove', moveAstroMan)
+
+let raycaster = new THREE.Raycaster() //  (+-13, 47, 135) ^ (+-5, 62, 135)
+let astroNorm = new THREE.Vector3()
+astroNorm.set(0, 0, 1)
+let astroPlane = new THREE.Plane(astroNorm, -135)
+let astroPos = new THREE.Vector3(4, 60, 135)
+
+function moveAstroMan(event) {
+    let pointer = new THREE.Vector2(
+        (event.clientX / window.innerWidth) * 2 - 1,
+        -(event.clientY / window.innerHeight) * 2 + 1
+    )
+    raycaster.setFromCamera(pointer, camera)
+    raycaster.ray.intersectPlane(astroPlane, astroPos)
+    // console.log(astroman.position, astroPos)
+}
+
+const clock = new THREE.Clock()
+
+const tick = () =>
+{
+    const elapsedTime = clock.getElapsedTime()
+
+    // Update objects
+    sun.rotation.y = 0.5 * elapsedTime
+    mercury.rotation.y = 1.5 * elapsedTime
+    venus.rotation.y = 2 * elapsedTime
+    earth.rotation.y = 6 * elapsedTime
+    mars.rotation.y = 2 * elapsedTime
+    jupiter.rotation.y = 1.5 * elapsedTime
+    saturn.rotation.y = 2.5 * elapsedTime
+    uranus.rotation.y = 2.5 * elapsedTime
+    neptune.rotation.y = 2.5 * elapsedTime
+
+    thetaMe += 0.005 *2*Math.PI
+    thetaV += 0.0025 *2*Math.PI
+    thetaE += 0.002 *2*Math.PI
+    thetaMa += 0.001 *2*Math.PI
+    thetaJ += 0.0007 *2*Math.PI
+    thetaS += 0.0006 *2*Math.PI
+    thetaU += 0.0003 *2*Math.PI
+    thetaN += 0.0002 *2*Math.PI
+    
+    mercury.position.set(15 * Math.cos(thetaMe), 0, -15 * Math.sin(thetaMe))
+    venus.position.set(25 * Math.cos(thetaV), 0, -25 * Math.sin(thetaV))
+    earth.position.set(40 * Math.cos(thetaE), 0, -40 * Math.sin(thetaE))
+    mars.position.set(55 * Math.cos(thetaMa), 0, -55 * Math.sin(thetaMa))
+    jupiter.position.set(75 * Math.cos(thetaJ), 0, -75 * Math.sin(thetaJ))
+    saturn.position.set(100 * Math.cos(thetaS), 0, -100 * Math.sin(thetaS))
+    saturnRing.position.set(100 * Math.cos(thetaS), 0, -100 * Math.sin(thetaS))
+    uranus.position.set(135 * Math.cos(thetaU), 0, -135 * Math.sin(thetaU))
+    neptune.position.set(155 * Math.cos(thetaN), 0, -155 * Math.sin(thetaN))
+
+    if (astroman.position.x < astroPos.x) {
+        astromanTexture.flipY = false
+        astromanTexture.needsUpdate = true
+        astromanMat.rotation = Math.PI
+        astroman.center = new THREE.Vector2(0.3, 1.1)
+    } else if (astroman.position.x > astroPos.x) {
+        astromanTexture.flipY = true
+        astromanTexture.needsUpdate = true
+        astromanMat.rotation = 0
+        astroman.center = new THREE.Vector2(0.3, -0.1)
+    }
+    astroman.position.x = astroPos.x
+    astroman.position.y = astroPos.y
+    astroman.position.z = astroPos.z
+
+    // Update Orbital Controls
+    // controls.update()
+
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
+}
+
+tick()
+    </script>
 </body>
-</html>

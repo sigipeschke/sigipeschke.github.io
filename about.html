@@ -7,23 +7,273 @@
     <link rel="stylesheet" href="./main.css">
     <link rel="icon" type="image/x-icon" href="/images/account_circle.ico">
     <title>About Siegfried Peschke</title>
+
+    <script src="./node_modules/pixi.js/dist/pixi.min.js"></script>
 </head>
 
-<body>
+<body class="about-page">
     <!--Navbar-->
     <div id="nav-placeholder"></div>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script>$(function(){$("#nav-placeholder").load("navbar.html");});</script>
-    <section class="hero">
-        <p class="about">
-            I am a highly motivated, self-taught computer science professional with a background in physics and a passion for solving complex problems. As a graduate of the University of Calgary with a degree in physics, I have a unique perspective on problem-solving and analytical thinking that I bring to my work in computer science.
-            <br><br>
-            My technical skills are broad and include expertise in programming languages and frameworks such as Python, Java, Spring Boot, JavaScript, TypeScript, and Angular. I have experience in building web-based applications and an understanding of the full software development life cycle. Additionally, I have a strong interest in machine learning and have hands-on experience with neural networks and TensorFlow.
-            <br><br>
-            My background in physics has also given me a strong foundation in mathematical modeling and problem solving. This has allowed me to approach complex computer science problems in a methodical and logical manner, and to devise efficient solutions. Furthermore, my physics background has also made me a very adaptable learner, able to quickly pick up new technologies and programming languages.
-            <br><br>
-            As a professional, I am dedicated to making a positive impact in the world and enhancing the lives of those around me. I am excited to bring my skills, passion, and analytical thinking to a new role where I can continue to grow and develop as a computer scientist. I am confident that my unique background and experiences make me a valuable asset to any team and I am eager to work with a forward-thinking company that values creative problem solving and continuous learning.
-        </p>
-    </section>
+
+    <div class="pixi-container">
+        <script>
+            // PIXI Scene
+
+            const app = new PIXI.Application({
+                width: window.innerWidth,
+                height: 2*window.innerHeight,
+                transparent: false,
+                antialias: true
+            });
+            app.renderer.background.color = 0x152238;
+            app.renderer.view.style.position = 'absolute';
+            document.body.appendChild(app.view);
+
+            // Star Field Background
+
+            const bgContainer = new PIXI.Container();
+            app.stage.addChild(bgContainer);
+
+            const starTexture = PIXI.Texture.from('./images/white-star.png');
+
+            let starAmount = 5000;
+            if (window.innerWidth < 769) {
+                const starAmount = 2000;
+            } 
+            let cameraZ = 0;
+            const fov = 30;
+            const baseSpeed = 0.05;
+            let speed = 0.1;
+            let warpSpeed = 0;
+            const starStretch = 5;
+            const starBaseSize = 0.0075;
+
+            // Create the stars
+            const stars = [];
+            for (let i = 0; i < starAmount; i++) {
+                const star = {
+                    sprite: new PIXI.Sprite(starTexture),
+                    z: 0,
+                    x: 0,
+                    y: 0,
+                };
+                star.sprite.anchor.x = 0.5;
+                star.sprite.anchor.y = 0.7;
+                randomizeStar(star, true);
+                bgContainer.addChild(star.sprite);
+                stars.push(star);
+            }
+
+            function randomizeStar(star, initial) {
+                star.z = initial ? Math.random() * 2000 : cameraZ + Math.random() * 1000 + 2000;
+                const deg = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 25 + 1;
+                star.x = Math.cos(deg) * 3*Math.sqrt(distance);
+                star.y = Math.sin(deg) * 3*distance;
+            }
+
+            // Change flight speed every 5 seconds
+            setInterval(() => {
+                warpSpeed = warpSpeed > 0 ? 0 : 0;
+            }, 5000);
+
+            // Listen for animate update
+            app.ticker.add((delta) => {
+                speed += (warpSpeed - speed) / 20;
+                cameraZ += delta * 10 * (speed + baseSpeed);
+                for (let i = 0; i < starAmount; i++) {
+                    const star = stars[i];
+                    if (star.z < cameraZ) randomizeStar(star);
+
+                    const z = star.z - cameraZ;
+                    star.sprite.x = star.x * (fov / z) * app.renderer.screen.width + app.renderer.screen.width / 2;
+                    star.sprite.y = star.y * (fov / z) * app.renderer.screen.width + app.renderer.screen.height / 2;
+
+                    const dxCenter = star.sprite.x - app.renderer.screen.width / 2;
+                    const dyCenter = star.sprite.y - app.renderer.screen.height / 2;
+                    const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
+                    const distanceScale = Math.max(0, (2000 - z) / 2000);
+                    star.sprite.scale.x = distanceScale * starBaseSize;
+
+                    star.sprite.scale.y = distanceScale * starBaseSize + distanceScale * speed * starStretch * distanceCenter / app.renderer.screen.width;
+                    star.sprite.rotation = Math.atan2(dyCenter, dxCenter) + Math.PI / 2;
+                }
+            });
+
+            // Profile Images
+
+            const profileImgContainer = new PIXI.Container();
+            app.stage.addChild(profileImgContainer);
+
+            // Profile Image 1
+
+            const profileImgTexture1 = PIXI.Texture.from('./images/IMG_5455.JPG');
+            const profileImg1 = new PIXI.Sprite(profileImgTexture1);
+            if (window.innerWidth >= window.innerHeight) {
+                profileImg1.scale.x = window.innerHeight / 1024 / 2;
+                profileImg1.scale.y = window.innerHeight / 1024 / 2;
+            } else {
+                profileImg1.scale.x = window.innerWidth / 1024 / 2;
+                profileImg1.scale.y = window.innerWidth / 1024 / 2;
+            }
+            profileImg1.x = -30;
+            profileImg1.y = (window.innerHeight / 2) - (profileImg1.height * 1024 / 2);
+
+            profileImgContainer.addChild(profileImg1);
+
+            // Profile Image 2
+
+            const profileImgTexture2 = PIXI.Texture.from('./images/IMG_5447.JPG');
+            const profileImg2 = new PIXI.Sprite(profileImgTexture2);
+            profileImg2.anchor.set(1, 0);
+            if (window.innerWidth >= window.innerHeight) {
+                profileImg2.scale.x = window.innerHeight / 1024 / 2;
+                profileImg2.scale.y = window.innerHeight / 1024 / 2;
+            } else {
+                profileImg2.scale.x = window.innerWidth / 1024 / 2;
+                profileImg2.scale.y = window.innerWidth / 1024 / 2;
+            }
+            profileImg2.x = window.innerWidth;
+            profileImg2.y = (window.innerHeight / 2) - (profileImg2.height * 1024 / 2) + window.innerHeight;
+
+            profileImgContainer.addChild(profileImg2);
+
+            // Filter
+
+            const shaderFrag = `
+                precision highp float;
+                uniform vec2 mouse;
+                uniform vec4 outputFrame;
+                uniform float time;
+
+                void main() {
+                    gl_FragColor = vec4( sin(time), (mouse.xy) * 0.5 / outputFrame.zw, 1.0) * 0.1; // blend with underlying image, alpha=0.5
+                }
+            `;
+            const profileImgFilterContainer1 = new PIXI.Container();
+            profileImgFilterContainer1.filterArea = new PIXI.Rectangle(profileImg1.x, profileImg1.y, profileImg1.width * 1024, profileImg1.height * 1024);
+            profileImgContainer.addChild(profileImgFilterContainer1);
+
+            const profileImgFilterContainer2 = new PIXI.Container();
+            profileImgFilterContainer2.filterArea = new PIXI.Rectangle(profileImg2.x - (profileImg2.width * 1024), profileImg2.y, profileImg2.width * 1024, profileImg2.height * 1024);
+            profileImgContainer.addChild(profileImgFilterContainer2);
+            
+            const profileImgFilter = new PIXI.Filter(null, shaderFrag, {mouse: new PIXI.Point()});
+            profileImgFilterContainer1.filters = [profileImgFilter];
+            profileImgFilterContainer2.filters = [profileImgFilter];
+
+            app.stage.hitArea = app.screen;
+            app.stage.interactive = true;
+            app.stage.on('pointermove', (event) => {
+                profileImgFilter.uniforms.mouse.copyFrom(event.global);
+            });
+
+            // Mask
+
+            const graphics = new PIXI.Graphics();
+            graphics.beginFill(0x000000);
+            // graphics.drawCircle(profileImg.x - (profileImg.width * 1024 / 2), profileImg.y + (profileImg.height * 1024 / 2), profileImg.width * 1024 / 2);
+            graphics.drawEllipse(profileImg1.x + (profileImg1.width * 1024/2), profileImg1.y + (profileImg1.height * 1024/2), profileImg1.width * 1024/2.5, profileImg1.height * 1024/2);
+            graphics.endFill();
+
+            graphics.beginFill(0x000000);
+            // graphics.drawCircle(profileImg.x - (profileImg.width * 1024 / 2), profileImg.y + (profileImg.height * 1024 / 2), profileImg.width * 1024 / 2);
+            graphics.drawEllipse(profileImg2.x - (profileImg2.width * 1024/2), profileImg2.y + (profileImg2.height * 1024/2), profileImg2.width * 1024/2.5, profileImg2.height * 1024/2);
+            graphics.endFill();
+
+            profileImgContainer.mask = graphics;
+
+            // Text
+
+            const paragraphContainer = new PIXI.Container();
+            app.stage.addChild(paragraphContainer);
+
+            // Title
+
+            const textStyle1 = new PIXI.TextStyle({
+                fontFamily: 'Poppins',
+                fontSize: 86,
+                letterSpacing: 4,
+                fill: '#ffffff',
+                stroke: 'black',
+                strokeThickness: 4,
+                wordWrap: true,
+                wordWrapWidth: window.innerWidth,
+            });
+
+            const title = new PIXI.Text('Me, Myself & I', textStyle1);
+            title.style.wordWrapWidth = window.innerWidth - 50;
+            if (window.innerWidth > 2000) {
+                title.style.wordWrapWidth = window.innerWidth - 160;
+            }
+            if (window.innerWidth < 769) {
+                title.style.fontSize = 64;
+            }
+            title.x = (window.innerWidth - title.width) / 2;
+            title.y = ((window.innerHeight / 2) - (profileImg1.height * 1024/2) - title.height) / 2;
+            paragraphContainer.addChild(title);
+
+            // Paragraph 1
+
+            const textStyle2 = new PIXI.TextStyle({
+                fontFamily: 'Poppins',
+                fontSize: 40,
+                letterSpacing: 4,
+                fill: '#ffffff',
+                stroke: 'black',
+                strokeThickness: 4,
+                wordWrap: true,
+                wordWrapWidth: window.innerWidth,
+            });
+
+            const para1 = new PIXI.Text('I am a highly motivated, self-taught computer science professional with a background in physics and a passion for solving complex problems. As a graduate of the University of Calgary with a degree in physics, I have a unique perspective on problem-solving and analytical thinking that I bring to my work in computer science.', textStyle2);
+            para1.style.wordWrapWidth = window.innerWidth - (profileImg1.width * 1024) - 50;
+            if (window.innerWidth > 2000) {
+                para1.style.wordWrapWidth = window.innerWidth - (profileImg1.width * 1024) - 160;
+                para1.style.fontSize = 48;
+            }
+            if (window.innerWidth < 1669) {
+                para1.style.fontSize = 32;
+            }
+            if (window.innerWidth < 1369) {
+                para1.style.fontSize = 28;
+            }
+            if (window.innerWidth < 1269) {
+                para1.style.fontSize = 25;
+            }
+            if (window.innerWidth < 1096) {
+                para1.style.fontSize = 21;
+            }
+            if (window.innerWidth < 769) {
+                para1.style.fontSize = 16;
+            }
+            para1.x = profileImg1.width * 1024;
+            para1.y = profileImg1.position.y + ((profileImg1.height*1024 - para1.height) / 2);
+            paragraphContainer.addChild(para1);
+
+            // Paragraph 2
+
+            const para2 = new PIXI.Text('My background in physics has given me a strong foundation in mathematical modeling and problem solving. This has allowed me to approach complex computer science problems in a methodical and logical manner, and to devise efficient solutions. Furthermore, my physics background has also made me a very adaptable learner, able to quickly pick up new technologies and programming languages.', textStyle2);
+            para2.x = (window.innerWidth - para2.width) / 2;
+            para2.y = (profileImg1.position.y + profileImg1.height*1024) + (profileImg2.position.y - profileImg1.position.y - profileImg1.height*1024 - para2.height)/2;
+            // if (window.innerWidth < 769) {
+            //     para2.y = profileImg2.position.y - (profileImg1.position.y + profileImg1.height*1024/2);
+            // }
+            paragraphContainer.addChild(para2);
+
+            // Paragraph 3
+
+            const para3 = new PIXI.Text('As a professional, I am dedicated to making a positive impact in the world and enhancing the lives of those around me. I am excited to bring my skills, passion, and analytical thinking to a new role where I can continue to grow and develop as a computer scientist. I am confident that my unique background and experiences make me a valuable asset to any team and I am eager to work with a forward-thinking company that values creative problem solving and continuous learning.', textStyle2);
+            para3.x = window.innerWidth - profileImg2.width*1024 - para3.width - 10;
+            para3.y = profileImg2.position.y + ((profileImg2.height*1024 - para3.height) /2);
+            if (window.innerWidth < 769) {
+                para3.y = profileImg2.position.y;
+            }
+            paragraphContainer.addChild(para3);
+
+        </script>
+    </div>
 </body>
 </html>

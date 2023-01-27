@@ -9,132 +9,98 @@
     <title>Siegfried Peschke - Projects</title>
 </head>
 
-<body>
+<body class="projects-page">
     <!--NavBar-->
     <div id="nav-placeholder"></div>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script>$(function(){$("#nav-placeholder").load("navbar.html");});</script>
 
-    <section class = portfolio-section>
+    <div class="projects-container">
         <h1>Angular Applications</h1>
-        <p class="sec-desc">Simple applications built in angular.</p>
-        <section class="ang-apps-section">
-            <div class="ang-app">
-                <p class="ang-app-title">World Population Demo
-                    <a href="https://world-population-app-sp.herokuapp.com/world-map" target="_blank">
-                        <img src="./images/population-img.PNG" alt="Population Demo Image">
+
+        <hr>
+        
+        <div class="project-R">
+            <img src="/images/investmentiq-img-1.PNG">
+            <div class="desc">
+                <h5>Featured Project</h5>
+                <h2>InvestmentIQ</h2>
+                <p class="para">InvestmentIQ is a powerful tool for managing and tracking your stock investments. It empowers you to take control of your portfolio, providing an overview of your performance on the stock market. With an interactive interface and dynamic table, you can easily monitor your current positions and sold positions, allowing you to make informed decisions about your investments. The platform also features a watchlist, allowing you to browse and track stocks from Canadian and American markets. It is designed to provide a seamless and visually engaging experience, making it simple for you to stay on top of your investments, and make the most out of your portfolio.</p>
+                <p>
+                    &nbsp &#8226 &nbsp Angular 
+                    &nbsp &#8226 &nbsp Java
+                    &nbsp &#8226 &nbsp Spring Boot
+                    &nbsp &#8226 &nbsp MySQL
+                    &nbsp &#8226 &nbsp Yahoo Finance &nbsp &#8226 &nbsp
+                </p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="project-L">
+            <div class="desc">
+                <h5>Featured Project</h5>
+                <h2>Bookworms Haven</h2>
+                <p class="para">Embark an exciting journey into the world of literature. Discover your next favorite book from a wide selection of popular titles, expertly curated into different categories like Top Picks, Highly Rated, Award Winners, and various Genres. Dive into the sea of books and find your treasure with a powerful search feature that allows you to filter books by Title, Author, Genre, or Rating. Get a sneak peek of your chosen book with a detailed modal popup, which provides you with a summary, a detailed description and a link to purchase the book on Amazon. This project is an excellent way to explore new books, find your next read and expand your literary horizons.</p>
+                <p>
+                    &nbsp &#8226 &nbsp Angular
+                    &nbsp &#8226 &nbsp PrimeNG
+                    &nbsp &#8226 &nbsp Forms &nbsp &#8226 &nbsp</p>
+            </div>
+            <img src="/images/library-img-1.PNG">
+        </div>
+        
+        <hr>
+        
+        <div class="project-R">
+            <img src="/images/population-img.PNG">
+            <div class="desc">
+                <h5>Featured Demo</h5>
+                <h2>Population Insights</h2>
+                <p class="para">Explore the world's population trends and patterns with Population Insights. This interactive project allows you to dive into the data and uncover insights about population growth for individual countries. Select a country from a list and view its population growth over time on a graph. Additionally, it displays an interactive map of the world showing the population distribution among countries. Users can explore the data by hovering over each country to see the exact population figures and compare it with others. The project provides a visually engaging and user-friendly way to discover and understand the world's population data.</p>
+                <p>
+                    &nbsp &#8226 &nbsp Angular 
+                    &nbsp &#8226 &nbsp NgCharts 
+                    &nbsp &#8226 &nbsp Highcharts &nbsp &#8226 &nbsp
+                </p>
+            </div>
+        </div>
+
+        <hr>
+
+        <h1>JavaScript Games</h1> 
+        
+
+        <div class="project-L">
+            <div class="desc">
+                <h5>Featured Projects</h5>
+                <h2>2048 &#8226 Tic Tac Toe &#8226 BlackJack &#8226 War</h2>
+                <p class="para">I have developed four interactive and fun games using JavaScript, HTML, and CSS to enhance my skills in web development. The first two games, Tic Tac Toe and 2048, are popular puzzle games that challenge players to think strategically. The second two games, War and BlackJack, are classic card games that provide an engaging experience for players. These projects were not only an opportunity to learn and improve my skills in JavaScript, HTML, and CSS, but also allowed me to create entertaining and enjoyable games that can be played by anyone.</p>
+                <p>
+                    &nbsp &#8226 &nbsp JavaScript
+                    &nbsp &#8226 &nbsp HTML
+                    &nbsp &#8226 &nbsp CSS &nbsp &#8226 &nbsp</p>
+            </div>
+            <div class="game-images">
+                    <a href="./2048-JS/index.html" target="blank">
+                        <img src="./images/2048-img.PNG">
                     </a>
-                </p>
-                <a class="code-cta" href="https://world-population-app-sp.herokuapp.com/world-map" target="_blank">See Live</a>
-                <a class="code-cta" href="https://github.com/sigipeschke/World-Population-App" target="_blank">See Code</a>
-            </div>
-
-            <div class="ang-app">
-                <p class="ang-app-title">Library of Popular Books
-                    <a href="https://popular-book-library-app.herokuapp.com/home" target="_blank">
-                        <img src="./images/library-img.PNG" alt="Library App Image">
+                    <a href="./TTT-JS/index.html" target="blank">
+                        <img src="./images/ttt-img.PNG">
                     </a>
-                </p>
-                <a class="code-cta" href="https://popular-book-library-app.herokuapp.com/home" target="_blank">See Live</a>
-                <a class="code-cta" href="https://github.com/sigipeschke/Popular-Books-Library-App" target="_blank">See Code</a>
+                    <a href="./BlackJack-JS/index.html" target="blank">
+                        <img src="./images/blackjack-img.PNG">
+                    </a>
+                    <a href="./War-JS/index.html" target="blank">
+                        <img src="./images/war-img.PNG">
+                    </a>
             </div>
-        </section>
+        </div>
+        
+        <hr>
 
-        <h1>Games</h1>
-        <p class="sec-desc">Projects which demonstrate basic interactive UI utilizing a combination of HTML, CSS, and JavaScript.</p>
-        <section class="games-section">
-            <div class="game">
-                <p class="game-title">Tic Tac Toe
-                    <a href="./TTT-JS/index.html" target="blank"><img src="./images/ttt-img.PNG" alt="Tic Tac Toe Image"></a>
-                </p>
-                <a class="play-cta" href="./TTT-JS/index.html" target="blank">Play</a>
-                <a class="code-cta" href="https://github.com/sigipeschke/sigipeschke.github.io/tree/main/TTT-JS" target="_blank">See Code</a>
-            </div>
-
-            <div class="game">
-                <p class="game-title">2048
-                    <a href="./2048-JS/index.html" target="blank"><img src="./images/2048-img.PNG" alt="2048 Image"></a>
-                </p>
-                <a class="play-cta" href="./2048-JS/index.html" target="blank">Play</a>
-                <a class="code-cta" href="https://github.com/sigipeschke/sigipeschke.github.io/tree/main/2048-JS" target="_blank">See Code</a>
-            </div>
-
-            <div class="game">
-                <p class="game-title">War
-                    <a href="./War-JS/index.html" target="blank"><img src="./images/war-img.PNG" alt="War Image"></a>
-                </p>
-                <a class="play-cta" href="./War-JS/index.html" target="blank">Play</a>
-                <a class="code-cta" href="https://github.com/sigipeschke/sigipeschke.github.io/tree/main/War-JS" target="_blank">See Code</a>
-            </div>
-
-            <div class="game">
-                <p class="game-title">Black Jack
-                    <a href="./BlackJack-JS/index.html" target="blank"><img src="./images/blackjack-img.PNG" alt="Black Jack Image"></a>
-                </p>
-                <a class="play-cta" href="./BlackJack-JS/index.html" target="blank">Play</a>
-                <a class="code-cta" href="https://github.com/sigipeschke/sigipeschke.github.io/tree/main/BlackJack-JS" target="_blank">See Code</a>
-            </div>
-        </section>
-
-        <h1>Physics</h1>
-        <p class="sec-desc">Research papers and presentations on various topics of personal interest in Physics.</p>
-        <section class="presentations">
-
-            <a class="pdf-pres" href="./portfolio/PHYS_599_Final_Report.pdf" target="blank">Attributing Lead Content in the Human Body to Cancer Causing Radon Gas Exposure</a>
-
-            <a class="pdf-pres" href="./portfolio/MATH_433_Term_Essay.pdf" target="blank">Effecient Space Travel to Mars</a>
-
-            <a class="pdf-pres" href="./portfolio/ASPH_401_Observing_Project.pdf" target="blank">Observing Globular Cluster Caldwell 47 (NGC 6934)</a>
-
-            <p class="pres-title"><br>(Presentation)
-                <a href="./portfolio/PHYS-599-LeadPP.svg" target="blank"><img src="./portfolio/PHYS-599-LeadPP.svg" alt="Presentation"></a>
-            </p>
-
-            <p class="pres-title">Terrel Rotations <br> (Relativity)
-                <a href="./portfolio/PHYS-325-RelativityPP.svg" target="blank"><img src="./portfolio/PHYS-325-RelativityPP.svg" alt="Presentation"></a>
-            </p>
-
-            <p class="pres-title">The G-Factor <br> (Quantum Mechanics)
-                <a href="./portfolio/PHYS-443-QuantumPP.svg" target="blank"><img src="./portfolio/PHYS-443-QuantumPP.svg" alt="Presentation"></a>
-            </p>
-        </section>
-
-        <h1>Computational Physics</h1>
-        <p class="sec-desc">A collection of my assignments from computational physics 381, 481, and 581 courses at the University of Calgary which emphasized exploration of tensorflow, ordinary differential equations, statistical analysis, polynomials, and various niche topics.</p>
-        <section class="jupyter-notebooks">
-            <a class="notebook" href="./portfolio/PHYS-581/PHYS581_FINALPROJECT.html" target="blank">•Exploring the effect of image preprocessing on TensorFlow image classification</a>
-            <a class="notebook" href="./portfolio/PHYS-581/PHYS581_Assignment4.html" target="blank">•Parralelizing computation in TensorFlow</a>
-            <a class="notebook" href="./portfolio/PHYS-581/PHYS581_Assignment2.html" target="blank">•TensorFlow introduction by determining slope and intercept from data points</a>
-            <a class="notebook" href="./portfolio/PHYS-581/PHYS581_Assignment1.html" target="blank">•Simplifying data utilizing principal component analysis and singular spectrum analysis</a>
-            
-            <a class="notebook" href="./portfolio/PHYS-581/PHYS581_Assignment3.html" target="blank">•Evaluation of the error, complementary error, and Faddeeva functions</a>
-            
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_10.html" target="blank">•Solving 1-D Diffusion and Schrödinger equations using Euler and Runge-Kutta method</a>
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_9.html" target="blank">•Solving Poisson's equation using the finite-difference approximation</a>
-            <a class="notebook" href="./portfolio/PHYS-381/PHYS_381_Assignment_4.html" target="blank">•Fractals and the Mandlebrot set</a>
-
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_8.html" target="blank">•Exploring the Ising model of magnetic dipole moments and spin states</a>
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_7.html" target="blank">•Statistical analysis of the system energy of the Pauli Paramagnet</a>
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_6.html" target="blank">•Analyzing the relationship between spin orientations, magnetization, temperature, total energy and entropy</a>
-            <a class="notebook" href="./portfolio/PHYS-381/PHYS_381_Assignment_3.html" target="blank">•Analysis of damped driven harmonic oscillators by solving ordinary differential equations</a>
-
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_5.html" target="blank">•Statistical analysis of random interacting walkers on a 1-D lattice</a>
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_4.html" target="blank">•Exploring steady states of a 1-D random walk utilizing Markov chain</a>
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_3.html" target="blank">•Analysis of pseudo random number generators and cellular automata</a>
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_2.html" target="blank">•Statistical analysis of die rolls and Lossless Image Compression</a>
-            
-            <a class="notebook" href="./portfolio/PHYS-381/PHYS_381_Final_Exam.html" target="blank">•Trend Fitting and extrapolating Carbon Dioxide concentration data</a>
-            <a class="notebook" href="./portfolio/PHYS-381/PHYS_381_Midterm.html" target="blank">•Chebyshev Polynomials and Lissajous Figures</a>
-            <a class="notebook" href="./portfolio/PHYS-381/PHYS_381_Assignment_1.html" target="blank">•Legendre Polynomials</a>
-            <a class="notebook" href="./portfolio/PHYS-381/PHYS_381_Assignment_0.html" target="blank">•Polynomial Evaluation and Taylor series</a>
-
-            <a></a>
-            <a class="notebook" href="./portfolio/PHYS-381/PHYS_381_Assignment_2.html" target="blank">•Computational Integration</a>
-            <a class="notebook" href="./portfolio/PHYS-481/PHYS_481_Assignment_1.html" target="blank">•Riffle shuffle, Arnold's map, Order Finding and Integer Factorization</a>
-        </section>
-
-    </section>
-
-
+    </div>
+    
 </body>
 </html>

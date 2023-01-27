@@ -1,0 +1,23 @@
+{
+  "name": "sigipeschke.github.io",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sigipeschke/sigipeschke.github.io.git"
+  },
+  "author": "Siegfried Peschke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sigipeschke/sigipeschke.github.io/issues"
+  },
+  "homepage": "https://github.com/sigipeschke/sigipeschke.github.io#readme",
+  "dependencies": {
+    "pixi.js": "^7.1.1",
+    "three": "^0.149.0"
+  }
+}

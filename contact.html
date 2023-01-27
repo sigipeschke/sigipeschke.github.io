@@ -7,37 +7,154 @@
     <link rel="stylesheet" href="./main.css">
     <link rel="icon" type="image/x-icon" href="/images/account_circle.ico">
     <title>Contact Siegfried Peschke</title>
+
+    <script src="./node_modules/pixi.js/dist/pixi.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('2i1L3jOuLi-vWY4Od');
+        })();
+    </script>
 </head>
 
-<body>
+<body class="contact-page">
     <!--Navbar-->
     <div id="nav-placeholder"></div>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script>$(function(){$("#nav-placeholder").load("navbar.html");});</script>
 
-    <section class="contact-section">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdpXE7AIhOK-vIgZj9m2S_tHsR9S3NXlJU-svi-J_PfRV84uQ/viewform?embedded=true" width="640" height="940" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-    </section>
+    <div class="pixi-container">
+        <script>
+            // PIXI Scene
 
+            const app = new PIXI.Application({
+                width: window.innerWidth,
+                height: window.innerHeight,
+                transparent: false,
+                antialias: true
+            });
+            app.renderer.background.color = 0x152238;
+            app.renderer.view.style.position = 'absolute';
+            document.body.appendChild(app.view);
 
-<!--
-    <section class = contact-section>
-        <h2>Contact</h2>
-        <div class="right-col">
-            <form action="">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name">
+            // Star Field Background
 
-                <label for="email">E-Mail</label>
-                <input type="email" id="email" name="email">
+            const bgContainer = new PIXI.Container();
+            app.stage.addChild(bgContainer);
 
-                <label for="message">Message</label>
-                <textarea name="message" id="message" cols="30" rows="10"></textarea>
+            const starTexture = PIXI.Texture.from('./images/white-star.png');
 
-                <input type="submit" class="send-message-cta" value="Send Message">
+            let starAmount = 5000;
+            if (window.innerWidth < 769) {
+                const starAmount = 2000;
+            } 
+            let cameraZ = 0;
+            const fov = 30;
+            const baseSpeed = 0.05;
+            let speed = 0.1;
+            let warpSpeed = 0;
+            const starStretch = 5;
+            const starBaseSize = 0.0075;
+
+            // Create the stars
+            const stars = [];
+            for (let i = 0; i < starAmount; i++) {
+                const star = {
+                    sprite: new PIXI.Sprite(starTexture),
+                    z: 0,
+                    x: 0,
+                    y: 0,
+                };
+                star.sprite.anchor.x = 0.5;
+                star.sprite.anchor.y = 0.7;
+                randomizeStar(star, true);
+                bgContainer.addChild(star.sprite);
+                stars.push(star);
+            }
+
+            function randomizeStar(star, initial) {
+                star.z = initial ? Math.random() * 2000 : cameraZ + Math.random() * 1000 + 2000;
+                const deg = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 25 + 1;
+                star.x = Math.cos(deg) * 2*distance;
+                star.y = Math.sin(deg) * 2*distance;
+            }
+
+            // Change flight speed every 5 seconds
+            setInterval(() => {
+                warpSpeed = warpSpeed > 0 ? 0 : 0;
+            }, 5000);
+
+            // Listen for animate update
+            app.ticker.add((delta) => {
+                speed += (warpSpeed - speed) / 20;
+                cameraZ += delta * 10 * (speed + baseSpeed);
+                for (let i = 0; i < starAmount; i++) {
+                    const star = stars[i];
+                    if (star.z < cameraZ) randomizeStar(star);
+
+                    const z = star.z - cameraZ;
+                    star.sprite.x = star.x * (fov / z) * app.renderer.screen.width + app.renderer.screen.width / 2;
+                    star.sprite.y = star.y * (fov / z) * app.renderer.screen.width + app.renderer.screen.height / 2;
+
+                    const dxCenter = star.sprite.x - app.renderer.screen.width / 2;
+                    const dyCenter = star.sprite.y - app.renderer.screen.height / 2;
+                    const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
+                    const distanceScale = Math.max(0, (2000 - z) / 2000);
+                    star.sprite.scale.x = distanceScale * starBaseSize;
+
+                    star.sprite.scale.y = distanceScale * starBaseSize + distanceScale * speed * starStretch * distanceCenter / app.renderer.screen.width;
+                    star.sprite.rotation = Math.atan2(dyCenter, dxCenter) + Math.PI / 2;
+                }
+            });
+        </script>
+    </div>
+
+    <div class="page-container">
+        <div class="contact-hero">
+            <div class="contact-img">
+                <img src="/images/IMG_5430-circ.png">
+            </div>
+            <div class="contacts">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" target="_blank">
+                <a href="mailto: sigipeschke3@gmail.com" class="fa fa-google"></a>
+                <a href="https://github.com/sigipeschke" class="fa fa-github" target="_blank"></a>
+                <a href="https://www.linkedin.com/in/sigi-peschke-163b821a1/" class="fa fa-linkedin" target="_blank"></a>
+            </div>
+        </div>
+        <div>
+            <form id="contact-form" class="contact-form">
+                <input type="hidden" name="contact_number">
+                <label>Name</label>
+                <input type="text" name="user_name" class="name-field">
+                <label>Email</label>
+                <input type="email" name="user_email" class="email-field">
+                <label>Message</label>
+                <textarea name="message" class="msg-field" style="resize:none"></textarea>
+                <input type="submit" value="Send" class="submit-btn">
             </form>
         </div>
-    </section>
--->
+    </div>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm('contact_me_service', 'contact_me_form', this)
+                    .then(function() {
+                        window.alert('EMAIL SUCCESS!');
+                        console.log('EMAIL SUCCESS!');
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
+
 </body>
 </html>

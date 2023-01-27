@@ -9,12 +9,14 @@
             <div>
                 <img id="mobile-exit" class="mobile-menu-exit" src="./images/menu-icon-close.svg" alt="Exit Navigation Menu">
             </div>
-            <ul class="primary-nav">
-                <li class="current"><a href="./index.html">Home</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="./projects.html">Projects</a></li>
-                <li><a href="./resume.html">Resume</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+
+            <ul id="navbar-items-list" class="primary-nav">
+                <li><a id="nav-home" href="./index.html">Home</a></li>
+                <li><a id="nav-about" href="./about.html">About</a></li>
+                <li><a id="nav-skills" href="./skills.html">Skills</a></li>
+                <li><a id="nav-projects" href="./projects.html">Projects</a></li>
+                <li><a id="nav-resume" href="./resume.html">Resume</a></li>
+                <li><a id="nav-contact" href="./contact.html">Contact</a></li>
             </ul>
         </nav>
     </div>
@@ -24,15 +26,25 @@
 
     const mobileBtn = document.getElementById('mobile-cta')
             nav = document.querySelector('nav')
-            mobileBtnExit = document.getElementById('mobile-exit');
+            mobileBtnExit = document.getElementById('mobile-exit')
 
     mobileBtn.addEventListener('click', () => {
-        nav.classList.add('menu-btn');
+        nav.classList.add('menu-btn')
     })
 
     mobileBtnExit.addEventListener('click', () => {
-        nav.classList.remove('menu-btn');
+        nav.classList.remove('menu-btn')
     })
+
+</script>
+
+<script>
+
+    const url = document.URL
+    const urlSplit = url.split('/')
+    const activePage = urlSplit[urlSplit.length - 1].split('.')[0]
+    activeId = 'nav-'.concat(activePage)
+    document.getElementById(activeId).classList.add('nav-active-page')
 
 </script>
 
