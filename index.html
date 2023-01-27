@@ -8,7 +8,9 @@
     <link rel="icon" type="image/x-icon" href="/images/account_circle.ico">
     <title>Siegfried Peschke - Portfolio</title>
 
-    <script src="./node_modules/three/build/three.js"></script>
+    <script src="./node_modules/three/build/three.js">
+        import * as THREE from 'three';
+    </script>
 </head>
 
 <body class="home-page">
@@ -25,8 +27,6 @@
     </div>
     
     <script>
-import * as THREE from 'three';
-
 // Loading
 const loadingManager = new THREE.LoadingManager( () => {
     const loadingScreen = document.getElementById( 'loading-screen' )
