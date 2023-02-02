@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./main.css">
-    <link rel="icon" type="image/x-icon" href="/images/account_circle.ico">
+    <link rel="icon" type="image/x-icon" href="/static/images/account_circle.ico">
     <title>Siegfried Peschke - Portfolio</title>
 
     <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
@@ -25,12 +25,10 @@
     </section>
 
     <canvas class="webgl"></canvas>
+    <canvas id="trail-canvas"></canvas>
+    <script src="./trail.js"></script>
 
-    <div id="enter-portfolio-div" class="home-page-intro">
-        <!--
-        <a href="./about.html"><img class="billboard" src="/images/home/billboard.png"></a>
-        -->
-    </div>
+    <div id="enter-portfolio-div" class="home-page-intro"></div>
 
     <script type="module">
 import * as THREE from 'three'
@@ -50,7 +48,7 @@ function onTransitionEnd( event ) {
 
     const enterIMG = document.createElement('img')
     enterIMG.setAttribute('class', 'billboard')
-    enterIMG.setAttribute('src', '/images/home/billboard.png')
+    enterIMG.setAttribute('src', '/static/images/home/billboard.png')
 
     enterCTA.appendChild(enterIMG)
 
@@ -61,41 +59,41 @@ function onTransitionEnd( event ) {
 // Load Textures
 const textureLoader = new THREE.TextureLoader(loadingManager)
 
-const bgTexture = textureLoader.load('/images/home/milky-way.jpg')
+const bgTexture = textureLoader.load('/static/images/home/milky-way.jpg')
 
-const sunTexture = textureLoader.load('/images/home/textures/sun-texture.jpg')
-const sunMap = textureLoader.load('/images/home/textures/sun-map.jpg')
+const sunTexture = textureLoader.load('/static/textures/sun-texture.jpg')
+const sunMap = textureLoader.load('/static/textures/sun-map.jpg')
 
-const mercuryTexture = textureLoader.load('/images/home/textures/mercury-texture.jpg')
-const mercuryMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+const mercuryTexture = textureLoader.load('/static/textures/mercury-texture.jpg')
+const mercuryMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
 
-const venusTexture = textureLoader.load('/images/home/textures/venus-texture.jpg')
-const venusMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+const venusTexture = textureLoader.load('/static/textures/venus-texture.jpg')
+const venusMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
 
-const earthTexture = textureLoader.load('/images/home/textures/earth-texture.jpg')
-const earthMap = textureLoader.load('/images/home/textures/earth-map.jpg')
+const earthTexture = textureLoader.load('/static/textures/earth-texture.jpg')
+const earthMap = textureLoader.load('/static/textures/earth-map.jpg')
 
-const moonTexture = textureLoader.load('/images/home/textures/moon-texture.jpg')
-const moonMap = textureLoader.load('/images/home/textures/moon-map.jpg')
+const moonTexture = textureLoader.load('/static/textures/moon-texture.jpg')
+const moonMap = textureLoader.load('/static/textures/moon-map.jpg')
 
-const marsTexture = textureLoader.load('/images/home/textures/mars-texture.jpg')
-const marsMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+const marsTexture = textureLoader.load('/static/textures/mars-texture.jpg')
+const marsMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
 
-const jupiterTexture = textureLoader.load('/images/home/textures/jupiter-texture.jpg')
-const jupiterMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+const jupiterTexture = textureLoader.load('/static/textures/jupiter-texture.jpg')
+const jupiterMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
 
-const saturnTexture = textureLoader.load('/images/home/textures/saturn-texture.jpg')
-const saturnMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
-const saturnRingTexture = textureLoader.load('/images/home/textures/saturn-ring-texture.png')
+const saturnTexture = textureLoader.load('/static/textures/saturn-texture.jpg')
+const saturnMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
+const saturnRingTexture = textureLoader.load('/static/textures/saturn-ring-texture.png')
 saturnRingTexture.rotation = Math.PI / 2
 
-const uranusTexture = textureLoader.load('/images/home/textures/uranus-texture.jpg')
-const uranusMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+const uranusTexture = textureLoader.load('/static/textures/uranus-texture.jpg')
+const uranusMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
 
-const neptuneTexture = textureLoader.load('/images/home/textures/neptune-texture.jpg')
-const neptuneMap = textureLoader.load('/images/home/textures/planet-surface-map.jpg')
+const neptuneTexture = textureLoader.load('/static/textures/neptune-texture.jpg')
+const neptuneMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
 
-const astromanTexture = textureLoader.load('/images/home/astro-rocket.png')
+const astromanTexture = textureLoader.load('/static/images/home/astro-rocket.png-NOSHOW')
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -253,10 +251,6 @@ camera.position.set(0, 60, 140)
 camera.lookAt(0, 0, 0)
 scene.add(camera)
 
-// Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
-
 /**
  * Renderer
  */
@@ -347,9 +341,6 @@ const tick = () =>
     astroman.position.x = astroPos.x
     astroman.position.y = astroPos.y
     astroman.position.z = astroPos.z
-
-    // Update Orbital Controls
-    // controls.update()
 
     // Render
     renderer.render(scene, camera)

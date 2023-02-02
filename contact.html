@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./main.css">
-    <link rel="icon" type="image/x-icon" href="/images/account_circle.ico">
+    <link rel="icon" type="image/x-icon" href="/static/images/account_circle.ico">
     <title>Contact Siegfried Peschke</title>
 
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.1.1/dist/pixi.min.js"></script>
@@ -33,7 +33,8 @@
                 width: window.innerWidth,
                 height: window.innerHeight,
                 transparent: false,
-                antialias: true
+                antialias: true,
+                resizeTo: window
             });
             app.renderer.background.color = 0x152238;
             app.renderer.view.style.position = 'absolute';
@@ -44,7 +45,7 @@
             const bgContainer = new PIXI.Container();
             app.stage.addChild(bgContainer);
 
-            const starTexture = PIXI.Texture.from('./images/white-star.png');
+            const starTexture = PIXI.Texture.from('/static/images/white-star.png');
 
             let starAmount = 5000;
             if (window.innerWidth < 769) {
@@ -115,7 +116,7 @@
     <div class="page-container">
         <div class="contact-hero">
             <div class="contact-img">
-                <img src="/images/IMG_5430-circ.png">
+                <img src="/static/images/IMG_5430-circ.png">
             </div>
             <div class="contacts">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" target="_blank">

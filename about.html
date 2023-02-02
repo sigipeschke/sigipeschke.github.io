@@ -5,10 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./main.css">
-    <link rel="icon" type="image/x-icon" href="/images/account_circle.ico">
+    <link rel="icon" type="image/x-icon" href="/static/images/account_circle.ico">
     <title>About Siegfried Peschke</title>
 
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.1.1/dist/pixi.min.js"></script>
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.149.0/build/three.module.js"
+          }
+        }
+      </script>
 </head>
 
 <body class="about-page">
@@ -20,24 +29,27 @@
     <div class="pixi-container">
         <script>
             // PIXI Scene
-
+            
             const app = new PIXI.Application({
                 width: window.innerWidth,
-                height: 2*window.innerHeight,
+                height: window.innerHeight,
                 transparent: false,
-                antialias: true
+                antialias: true,
+                resizeTo: window,
+                backgroundAlpha: 0
             });
-            app.renderer.background.color = 0x152238;
+            // app.renderer.background.color = 0x152238;
             app.renderer.view.style.position = 'absolute';
+            
             document.body.appendChild(app.view);
-
+            
             // Star Field Background
-
+            
             const bgContainer = new PIXI.Container();
             app.stage.addChild(bgContainer);
-
-            const starTexture = PIXI.Texture.from('./images/white-star.png');
-
+            
+            const starTexture = PIXI.Texture.from('/static/images/white-star.png');
+            
             let starAmount = 5000;
             if (window.innerWidth < 769) {
                 const starAmount = 2000;
@@ -49,7 +61,7 @@
             let warpSpeed = 0;
             const starStretch = 5;
             const starBaseSize = 0.0075;
-
+            
             // Create the stars
             const stars = [];
             for (let i = 0; i < starAmount; i++) {
@@ -65,20 +77,20 @@
                 bgContainer.addChild(star.sprite);
                 stars.push(star);
             }
-
+            
             function randomizeStar(star, initial) {
                 star.z = initial ? Math.random() * 2000 : cameraZ + Math.random() * 1000 + 2000;
                 const deg = Math.random() * Math.PI * 2;
                 const distance = Math.random() * 25 + 1;
-                star.x = Math.cos(deg) * 3*Math.sqrt(distance);
-                star.y = Math.sin(deg) * 3*distance;
+                star.x = Math.cos(deg) * 2*distance;
+                star.y = Math.sin(deg) * 2*distance - 4;
             }
-
+            
             // Change flight speed every 5 seconds
             setInterval(() => {
                 warpSpeed = warpSpeed > 0 ? 0 : 0;
             }, 5000);
-
+            
             // Listen for animate update
             app.ticker.add((delta) => {
                 speed += (warpSpeed - speed) / 20;
@@ -86,194 +98,268 @@
                 for (let i = 0; i < starAmount; i++) {
                     const star = stars[i];
                     if (star.z < cameraZ) randomizeStar(star);
-
+            
                     const z = star.z - cameraZ;
                     star.sprite.x = star.x * (fov / z) * app.renderer.screen.width + app.renderer.screen.width / 2;
                     star.sprite.y = star.y * (fov / z) * app.renderer.screen.width + app.renderer.screen.height / 2;
-
+            
                     const dxCenter = star.sprite.x - app.renderer.screen.width / 2;
                     const dyCenter = star.sprite.y - app.renderer.screen.height / 2;
                     const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
                     const distanceScale = Math.max(0, (2000 - z) / 2000);
                     star.sprite.scale.x = distanceScale * starBaseSize;
-
+            
                     star.sprite.scale.y = distanceScale * starBaseSize + distanceScale * speed * starStretch * distanceCenter / app.renderer.screen.width;
                     star.sprite.rotation = Math.atan2(dyCenter, dxCenter) + Math.PI / 2;
                 }
             });
-
-            // Profile Images
-
-            const profileImgContainer = new PIXI.Container();
-            app.stage.addChild(profileImgContainer);
-
-            // Profile Image 1
-
-            const profileImgTexture1 = PIXI.Texture.from('./images/IMG_5455.JPG');
-            const profileImg1 = new PIXI.Sprite(profileImgTexture1);
-            if (window.innerWidth >= window.innerHeight) {
-                profileImg1.scale.x = window.innerHeight / 1024 / 2;
-                profileImg1.scale.y = window.innerHeight / 1024 / 2;
-            } else {
-                profileImg1.scale.x = window.innerWidth / 1024 / 2;
-                profileImg1.scale.y = window.innerWidth / 1024 / 2;
-            }
-            profileImg1.x = -30;
-            profileImg1.y = (window.innerHeight / 2) - (profileImg1.height * 1024 / 2);
-
-            profileImgContainer.addChild(profileImg1);
-
-            // Profile Image 2
-
-            const profileImgTexture2 = PIXI.Texture.from('./images/IMG_5447.JPG');
-            const profileImg2 = new PIXI.Sprite(profileImgTexture2);
-            profileImg2.anchor.set(1, 0);
-            if (window.innerWidth >= window.innerHeight) {
-                profileImg2.scale.x = window.innerHeight / 1024 / 2;
-                profileImg2.scale.y = window.innerHeight / 1024 / 2;
-            } else {
-                profileImg2.scale.x = window.innerWidth / 1024 / 2;
-                profileImg2.scale.y = window.innerWidth / 1024 / 2;
-            }
-            profileImg2.x = window.innerWidth;
-            profileImg2.y = (window.innerHeight / 2) - (profileImg2.height * 1024 / 2) + window.innerHeight;
-
-            profileImgContainer.addChild(profileImg2);
-
-            // Filter
-
-            const shaderFrag = `
-                precision highp float;
-                uniform vec2 mouse;
-                uniform vec4 outputFrame;
-                uniform float time;
-
-                void main() {
-                    gl_FragColor = vec4( sin(time), (mouse.xy) * 0.5 / outputFrame.zw, 1.0) * 0.1; // blend with underlying image, alpha=0.5
-                }
-            `;
-            const profileImgFilterContainer1 = new PIXI.Container();
-            profileImgFilterContainer1.filterArea = new PIXI.Rectangle(profileImg1.x, profileImg1.y, profileImg1.width * 1024, profileImg1.height * 1024);
-            profileImgContainer.addChild(profileImgFilterContainer1);
-
-            const profileImgFilterContainer2 = new PIXI.Container();
-            profileImgFilterContainer2.filterArea = new PIXI.Rectangle(profileImg2.x - (profileImg2.width * 1024), profileImg2.y, profileImg2.width * 1024, profileImg2.height * 1024);
-            profileImgContainer.addChild(profileImgFilterContainer2);
-            
-            const profileImgFilter = new PIXI.Filter(null, shaderFrag, {mouse: new PIXI.Point()});
-            profileImgFilterContainer1.filters = [profileImgFilter];
-            profileImgFilterContainer2.filters = [profileImgFilter];
-
-            app.stage.hitArea = app.screen;
-            app.stage.interactive = true;
-            app.stage.on('pointermove', (event) => {
-                profileImgFilter.uniforms.mouse.copyFrom(event.global);
-            });
-
-            // Mask
-
-            const graphics = new PIXI.Graphics();
-            graphics.beginFill(0x000000);
-            // graphics.drawCircle(profileImg.x - (profileImg.width * 1024 / 2), profileImg.y + (profileImg.height * 1024 / 2), profileImg.width * 1024 / 2);
-            graphics.drawEllipse(profileImg1.x + (profileImg1.width * 1024/2), profileImg1.y + (profileImg1.height * 1024/2), profileImg1.width * 1024/2.5, profileImg1.height * 1024/2);
-            graphics.endFill();
-
-            graphics.beginFill(0x000000);
-            // graphics.drawCircle(profileImg.x - (profileImg.width * 1024 / 2), profileImg.y + (profileImg.height * 1024 / 2), profileImg.width * 1024 / 2);
-            graphics.drawEllipse(profileImg2.x - (profileImg2.width * 1024/2), profileImg2.y + (profileImg2.height * 1024/2), profileImg2.width * 1024/2.5, profileImg2.height * 1024/2);
-            graphics.endFill();
-
-            profileImgContainer.mask = graphics;
-
-            // Text
-
-            const paragraphContainer = new PIXI.Container();
-            app.stage.addChild(paragraphContainer);
-
-            // Title
-
-            const textStyle1 = new PIXI.TextStyle({
-                fontFamily: 'Poppins',
-                fontSize: 86,
-                letterSpacing: 4,
-                fill: '#ffffff',
-                stroke: 'black',
-                strokeThickness: 4,
-                wordWrap: true,
-                wordWrapWidth: window.innerWidth,
-            });
-
-            const title = new PIXI.Text('Me, Myself & I', textStyle1);
-            title.style.wordWrapWidth = window.innerWidth - 50;
-            if (window.innerWidth > 2000) {
-                title.style.wordWrapWidth = window.innerWidth - 160;
-            }
-            if (window.innerWidth < 769) {
-                title.style.fontSize = 64;
-            }
-            title.x = (window.innerWidth - title.width) / 2;
-            title.y = ((window.innerHeight / 2) - (profileImg1.height * 1024/2) - title.height) / 2;
-            paragraphContainer.addChild(title);
-
-            // Paragraph 1
-
-            const textStyle2 = new PIXI.TextStyle({
-                fontFamily: 'Poppins',
-                fontSize: 40,
-                letterSpacing: 4,
-                fill: '#ffffff',
-                stroke: 'black',
-                strokeThickness: 4,
-                wordWrap: true,
-                wordWrapWidth: window.innerWidth,
-            });
-
-            const para1 = new PIXI.Text('I am a highly motivated, self-taught computer science professional with a background in physics and a passion for solving complex problems. As a graduate of the University of Calgary with a degree in physics, I have a unique perspective on problem-solving and analytical thinking that I bring to my work in computer science.', textStyle2);
-            para1.style.wordWrapWidth = window.innerWidth - (profileImg1.width * 1024) - 50;
-            if (window.innerWidth > 2000) {
-                para1.style.wordWrapWidth = window.innerWidth - (profileImg1.width * 1024) - 160;
-                para1.style.fontSize = 48;
-            }
-            if (window.innerWidth < 1669) {
-                para1.style.fontSize = 32;
-            }
-            if (window.innerWidth < 1369) {
-                para1.style.fontSize = 28;
-            }
-            if (window.innerWidth < 1269) {
-                para1.style.fontSize = 25;
-            }
-            if (window.innerWidth < 1096) {
-                para1.style.fontSize = 21;
-            }
-            if (window.innerWidth < 769) {
-                para1.style.fontSize = 16;
-            }
-            para1.x = profileImg1.width * 1024;
-            para1.y = profileImg1.position.y + ((profileImg1.height*1024 - para1.height) / 2);
-            paragraphContainer.addChild(para1);
-
-            // Paragraph 2
-
-            const para2 = new PIXI.Text('My background in physics has given me a strong foundation in mathematical modeling and problem solving. This has allowed me to approach complex computer science problems in a methodical and logical manner, and to devise efficient solutions. Furthermore, my physics background has also made me a very adaptable learner, able to quickly pick up new technologies and programming languages.', textStyle2);
-            para2.x = (window.innerWidth - para2.width) / 2;
-            para2.y = (profileImg1.position.y + profileImg1.height*1024) + (profileImg2.position.y - profileImg1.position.y - profileImg1.height*1024 - para2.height)/2;
-            // if (window.innerWidth < 769) {
-            //     para2.y = profileImg2.position.y - (profileImg1.position.y + profileImg1.height*1024/2);
-            // }
-            paragraphContainer.addChild(para2);
-
-            // Paragraph 3
-
-            const para3 = new PIXI.Text('As a professional, I am dedicated to making a positive impact in the world and enhancing the lives of those around me. I am excited to bring my skills, passion, and analytical thinking to a new role where I can continue to grow and develop as a computer scientist. I am confident that my unique background and experiences make me a valuable asset to any team and I am eager to work with a forward-thinking company that values creative problem solving and continuous learning.', textStyle2);
-            para3.x = window.innerWidth - profileImg2.width*1024 - para3.width - 10;
-            para3.y = profileImg2.position.y + ((profileImg2.height*1024 - para3.height) /2);
-            if (window.innerWidth < 769) {
-                para3.y = profileImg2.position.y;
-            }
-            paragraphContainer.addChild(para3);
-
         </script>
     </div>
+
+    <div class="hero">
+        <h1>About Sigi</h1>
+        <p class="desc1">
+            I am a highly motivated, self-taught computer science professional with a background in physics and a passion for solving complex problems. As a graduate of the University of Calgary with a degree in physics, I have a unique perspective on problem-solving and analytical thinking that I bring to my work in computer science.
+        </p>
+        <p class="desc2">
+            My background in physics has given me a strong foundation in mathematical modeling and problem solving. This has allowed me to approach complex computer science problems in a methodical and logical manner, and to devise efficient solutions. Furthermore, my physics background has also made me a very adaptable learner, able to quickly pick up new technologies and programming languages.
+            <br><br>
+            As a professional, I am dedicated to making a positive impact in the world and enhancing the lives of those around me. I am excited to bring my skills, passion, and analytical thinking to a new role where I can continue to grow and develop as a computer scientist. I am confident that my unique background and experiences make me a valuable asset to any team and I am eager to work with a forward-thinking company that values creative problem solving and continuous learning.
+        </p>
+    </div>
+
+    <canvas class="webgl"></canvas>
+
+    <script type="module">
+import * as THREE from 'three'
+
+// Canvas
+const canvas = document.querySelector('canvas.webgl')
+
+// Scene
+const scene = new THREE.Scene()
+
+// Texture
+const textureLoader = new THREE.TextureLoader()
+
+const sunMap = textureLoader.load('/static/textures/sun-map.jpg')
+const sunTexture = textureLoader.load('/static/textures/sun-texture.jpg')
+// const earthMap = textureLoader.load('/static/textures/earth-map.jpg')
+// const earthTexture = textureLoader.load('/static/textures/earth-texture-2.png')
+
+// Objects
+const sunGeo = new THREE.SphereGeometry(2, 64, 64)
+const sunLightGeo = new THREE.SphereGeometry(2.6, 64, 64)
+const earthGeo = new THREE.SphereGeometry(1, 64, 64)
+const atmosphereGeo = new THREE.SphereGeometry(1.4, 64, 64)
+
+// Shaders
+
+const sunShaderVert = `
+    varying vec3 vertexNormal;
+
+    void main() {
+        vertexNormal = normalize(normalMatrix * normal);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`
+
+const sunShaderFrag = `
+    varying vec3 vertexNormal;
+
+    void main() {
+        float intensity = pow(0.5 - dot(vertexNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+
+        gl_FragColor = vec4(1.0, 0.5, 0.2, 1.0) * intensity;
+    }
+`
+
+const earthShaderVert = `
+    varying vec2 vertexUV;
+    varying vec3 vertexNormal;
+
+    void main() {
+        vertexUV = uv;
+        vertexNormal = normalize(normalMatrix * normal);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`
+
+const earthShaderFrag = `
+    uniform sampler2D globeTexture;
+    varying vec2 vertexUV;
+    varying vec3 vertexNormal;
+
+    void main() {
+        float intensity = 1.05 - dot(vertexNormal, vec3(0.0, 0.0, 1.0));
+        vec3 atmosphere = vec3(0.3, 0.6, 1.0) * pow(intensity, 1.5);
+
+        gl_FragColor = vec4(texture2D(globeTexture, vertexUV).xyz, 1.0);
+    }
+`
+
+const atmosphereShaderVert = `
+    varying vec3 vertexNormal;
+
+    void main() {
+        vertexNormal = normalize(normalMatrix * normal);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`
+
+const atmosphereShaderFrag = `
+    varying vec3 vertexNormal;
+
+    void main() {
+        float intensity = pow(0.5 - dot(vertexNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+
+        gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
+    }
+`
+
+// Materials
+
+const sunMat = new THREE.MeshStandardMaterial()
+sunMat.normalMap = sunMap
+sunMat.map = sunTexture
+
+const sunLightMat = new THREE.ShaderMaterial({
+    vertexShader: sunShaderVert,
+    fragmentShader: sunShaderFrag,
+    blending: THREE.AdditiveBlending,
+    side: THREE.BackSide
+})
+
+
+const earthMat = new THREE.ShaderMaterial({
+    vertexShader: earthShaderVert,
+    fragmentShader: earthShaderFrag,
+    uniforms: {
+        globeTexture: {
+            value: textureLoader.load('/static/textures/earth-texture-2.png')
+        }
+    }
+})
+
+// const earthMat = new THREE.MeshStandardMaterial()
+// earthMat.normalMap = earthMap
+// earthMat.map = earthTexture
+
+const atmosphereMat = new THREE.ShaderMaterial({
+    vertexShader: atmosphereShaderVert,
+    fragmentShader: atmosphereShaderFrag,
+    blending: THREE.AdditiveBlending,
+    side: THREE.BackSide
+})
+
+// Mesh
+
+const sun = new THREE.Mesh(sunGeo, sunMat)
+sun.position.set(0, 6, -50)
+scene.add(sun)
+
+const sunLight = new THREE.Mesh(sunLightGeo, sunLightMat)
+sunLight.position.set(0, 6.2, -50)
+scene.add(sunLight)
+
+const earth = new THREE.Mesh(earthGeo, earthMat)
+earth.position.set(0, 0, 10)
+scene.add(earth)
+
+const atmosphere = new THREE.Mesh(atmosphereGeo, atmosphereMat)
+atmosphere.position.set(0, 0, 10.5)
+scene.add(atmosphere)
+
+// Lights
+
+const light = new THREE.AmbientLight(0x404040, 4)
+scene.add(light)
+
+/**
+ * Sizes
+ */
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
+
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+/**
+ * Camera
+ */
+
+// Base camera
+const camera = new THREE.PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 100)
+camera.position.set(0, 1.25, 11.5)
+camera.lookAt(0, 0, 0)
+scene.add(camera)
+
+/**
+ * Renderer
+ */
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true
+})
+renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+/**
+ * Animate
+ */
+
+document.addEventListener('mousemove', onDocumentMouseMove)
+
+let mouseX = 0
+let mouseY = 0
+const windowHalfX = window.innerWidth / 2
+const windowHalfY = window.innerHeight / 2
+
+function onDocumentMouseMove(event) {
+    mouseX = (event.clientX - windowHalfX) * 0.001
+    mouseY = (event.clientY - windowHalfY) * 0.001
+}
+
+const clock = new THREE.Clock()
+
+const tick = () =>
+{
+
+    const elapsedTime = clock.getElapsedTime()
+
+    // Update objects
+    sun.rotation.y = 0.2 * elapsedTime
+    earth.rotation.x = -0.2 * elapsedTime
+    // earth.rotation.x += 0.1 * (mouseY - earth.rotation.x)
+    earth.rotation.y += 0.001 * (mouseX - earth.rotation.y)
+
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
+}
+
+tick()
+    </script>
+
 </body>
 </html>

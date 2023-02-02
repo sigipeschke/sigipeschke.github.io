@@ -126,7 +126,7 @@
 }
 
 body {
-  background: white;
+  background: var(--primary_bg_color);
   margin: 0;
   font-family: 'Poppins';
 }
@@ -149,8 +149,53 @@ body {
   scale: 0.75;
 }
 
+#trail-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .about-page {
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.about-page .hero {
+  display: flex;
+  width: 100%;
+  z-index: 102;
+}
+
+.about-page .hero h1 {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  font-size: 5em;
+  margin-bottom: 0.2em;
+  color: white;
+  text-shadow: 15px 15px var(--secondary_text_color);
+  letter-spacing: 0.05rem;
+}
+
+.about-page .hero .desc1 {
+  position: absolute;
+  top: calc(20% + 5em);
+  left: 5%;
+  width: 40%;
+  color: white;
+  font-size: 1.3rem;
+  text-align: left;
+  padding-bottom: 2em;
+}
+
+.about-page .hero .desc2 {
+  position: absolute;
+  top: 12%;
+  left: 55%;
+  width: 40%;
+  color: white;
+  font-size: 1.3rem;
+  text-align: left;
+  padding-bottom: 2em;
 }
 
 .skills-page {
@@ -165,7 +210,7 @@ body {
 
 .skills-page .hero h1 {
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 10%;
   font-size: 5em;
   margin-bottom: 0.2em;
@@ -176,16 +221,52 @@ body {
 
 .skills-page .hero .desc {
   position: absolute;
-  top: calc(30% + 5em);
+  top: calc(20% + 5em);
   left: 5%;
   width: 50%;
   color: white;
-  font-size: 1.3rem;
+  font-size: 1.3em;
   text-align: left;
   padding-bottom: 2em;
 }
 
-.skills-page .skills-sphere{
+.skills-card {
+  position: absolute;
+  top: 42%;
+  left: 10%;
+  width: 45%;
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  color: white;
+}
+
+.skills-card ul {
+  list-style-type: none;
+  padding: 0 50px 0 0;
+}
+
+.skills-card ul li {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.skills-card .skill-logo {
+  margin-right: 25px;
+  height: 50px;
+}
+
+.skills-card h3 {
+  font-size: 2rem;
+}
+
+.skills-card p {
+  position: absolute;
+  top: -10px;
+  left: 75px;
+  font-size: 1.5rem;
+}
+
+.skills-page .skills-sphere {
   position: absolute;
   top: 50%;
   right: 5%;
@@ -273,10 +354,12 @@ body {
 }
 
 .projects-page .projects-container .project-R .desc .para {
+  text-align: left;
   margin: 20px 60px 20px -60px;
   padding: 20px 15px;
   color: white;
   background-color: #1c2d4e;
+  font-size: 1.2em;
 }
 
 .projects-page .projects-container .project-L {
@@ -317,6 +400,7 @@ body {
   padding: 20px 15px;
   color: white;
   background-color: #1c2d4e;
+  font-size: 1.2em;
 }
 
 .projects-page .projects-container .project-L .game-images {
