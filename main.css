@@ -8,7 +8,7 @@
 
 .navbar {
   background: var(--primary_color);
-  padding: 1em;
+  padding: 1rem;
 }
 
 .navbar .container {
@@ -21,7 +21,7 @@
 
 .navbar .logo {
   text-decoration: none;
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: bold;
   color: rgb(255, 255, 255);
 }
@@ -32,8 +32,8 @@
 
 .navbar .mobile-menu-open {
   cursor: pointer;
-  width: 2em;
-  margin: 0.5em;
+  width: 2rem;
+  margin: 0.5rem;
 }
 
 .navbar nav.menu-btn {
@@ -43,8 +43,8 @@
 .navbar .mobile-menu-txt {
   font-weight: bold;
   float: left;
-  font-size: 1.2em;
-  margin: 0.5em 0;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
   padding: 0;
 }
 
@@ -63,8 +63,8 @@
 
 .navbar nav .mobile-menu-exit {
   cursor: pointer;
-  width: 2em;
-  margin: 0.5em;
+  width: 2rem;
+  margin: 0.5rem;
 }
 
 .navbar nav ul {
@@ -74,21 +74,21 @@
 }
 
 .navbar nav li a {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: bold;
   color: rgb(255, 255, 255);
   text-decoration: none;
   display: block;
-  padding: 0.5em 0.2em;
+  padding: 0.5rem 0.2rem;
 }
 
 .navbar nav li a:hover {
-  font-size: 1.4em;
+  font-size: 1.4rem;
 }
 
 .navbar .primary-nav .nav-active-page {
   color: var(--secondary_color);
-  font-size: 1.4em;
+  font-size: 1.4rem;
 }
 
 @media only screen and (min-width: 999px) {
@@ -112,8 +112,8 @@
     position: right;
     height: auto;
     width: auto;
-    margin-top: 1em;
-    padding: 0 1em;
+    margin-top: 1rem;
+    padding: 0 1rem;
   }
   .navbar nav ul {
     display: -webkit-box;
@@ -121,8 +121,28 @@
     display: flex;
   }
   .navbar nav li a {
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
   }
+}
+
+html {
+  font-size: 18px;
+}
+
+@media (max-width: 2000px) {
+  html {font-size: 16px;}
+}
+
+@media (max-width: 1600px) {
+  html {font-size: 14px;}
+}
+
+@media (max-width: 1200px) {
+  html {font-size: 12px;}
+}
+
+@media (max-width: 999px) {
+  html {font-size: 10px;}
 }
 
 body {
@@ -169,8 +189,8 @@ body {
   position: absolute;
   top: 10%;
   left: 10%;
-  font-size: 5em;
-  margin-bottom: 0.2em;
+  font-size: 5rem;
+  margin-bottom: 0.2rem;
   color: white;
   text-shadow: 15px 15px var(--secondary_text_color);
   letter-spacing: 0.05rem;
@@ -178,13 +198,13 @@ body {
 
 .about-page .hero .desc1 {
   position: absolute;
-  top: calc(20% + 5em);
+  top: calc(22% + 5rem);
   left: 5%;
   width: 40%;
   color: white;
   font-size: 1.3rem;
   text-align: left;
-  padding-bottom: 2em;
+  padding-bottom: 2rem;
 }
 
 .about-page .hero .desc2 {
@@ -195,7 +215,7 @@ body {
   color: white;
   font-size: 1.3rem;
   text-align: left;
-  padding-bottom: 2em;
+  padding-bottom: 2rem;
 }
 
 .skills-page {
@@ -212,8 +232,8 @@ body {
   position: absolute;
   top: 10%;
   left: 10%;
-  font-size: 5em;
-  margin-bottom: 0.2em;
+  font-size: 5rem;
+  margin-bottom: 0.2rem;
   color: white;
   text-shadow: 15px 15px var(--secondary_text_color);
   letter-spacing: 0.05rem;
@@ -221,13 +241,13 @@ body {
 
 .skills-page .hero .desc {
   position: absolute;
-  top: calc(20% + 5em);
+  top: calc(20% + 5rem);
   left: 5%;
   width: 50%;
   color: white;
-  font-size: 1.3em;
+  font-size: 1.3rem;
   text-align: left;
-  padding-bottom: 2em;
+  padding-bottom: 2rem;
 }
 
 .skills-card {
@@ -247,12 +267,12 @@ body {
 
 .skills-card ul li {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 1rem;
 }
 
 .skills-card .skill-logo {
-  margin-right: 25px;
-  height: 50px;
+  margin-right: 1rem;
+  height: 2.8rem;
 }
 
 .skills-card h3 {
@@ -263,7 +283,7 @@ body {
   position: absolute;
   top: -10px;
   left: 75px;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .skills-page .skills-sphere {
@@ -275,7 +295,7 @@ body {
 .skills-page .tagcloud {
   font-weight: 600;
   font-family: 'Poppins', cursive;
-  font-size: 0.8em;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   color:var(--secondary_text_color)
 }
@@ -288,11 +308,11 @@ body {
   }
 
   .skills-page .tagcloud {
-    font-size: 1.2em;
+    font-size: 1.2rem;
   }
 
   .skills-page .tagcloud--item:hover {
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: 900;
     color: #FFC300 ;
     cursor: default;
@@ -308,8 +328,8 @@ body {
 }
 
 .projects-page .projects-container h1 {
-  font-size: 3em;
-  margin-bottom: 0.2em;
+  font-size: 3rem;
+  margin-bottom: 0.2rem;
   color: white;
   text-shadow: 15px 15px var(--secondary_text_color);
   letter-spacing: 0.05rem;
@@ -346,11 +366,11 @@ body {
 
 .projects-page .projects-container .project-R .desc h2 {
   color: white;
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 .projects-page .projects-container .project-R .desc h5 {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .projects-page .projects-container .project-R .desc .para {
@@ -359,7 +379,7 @@ body {
   padding: 20px 15px;
   color: white;
   background-color: #1c2d4e;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .projects-page .projects-container .project-L {
@@ -388,11 +408,11 @@ body {
 
 .projects-page .projects-container .project-L .desc h2 {
   color: white;
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 .projects-page .projects-container .project-L .desc h5 {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .projects-page .projects-container .project-L .desc .para {
@@ -400,7 +420,7 @@ body {
   padding: 20px 15px;
   color: white;
   background-color: #1c2d4e;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .projects-page .projects-container .project-L .game-images {
@@ -455,9 +475,9 @@ body {
 }
 
 .contact-page .page-container .contact-hero .contacts .fa {
-  padding: 0.5em;
-  font-size: 2em;
-  width: 1em;
+  padding: 0.5rem;
+  font-size: 2rem;
+  width: 1rem;
   text-align: center;
   text-decoration: none;
   margin: 0 10px;
@@ -485,7 +505,7 @@ body {
   gap: 30px;
   margin-top: 25%;
   color: white;
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 .contact-page .page-container .contact-form label {
@@ -493,7 +513,7 @@ body {
 }
 
 .contact-page .page-container .contact-form .name-field{
-  font-size: 0.7em;
+  font-size: 0.7rem;
   width: 60%;
 }
 
@@ -504,7 +524,7 @@ body {
 
 .contact-page .page-container .contact-form .msg-field{
   grid-row: span 10;
-  font-size: 0.7em;
+  font-size: 0.7rem;
   width: 80%;
 }
 
@@ -512,11 +532,11 @@ body {
   grid-column: 2;
   width: fit-content;
   text-align: center;
-  font-size: 1.0em;
+  font-size: 1.0rem;
   font-weight: bold;
-  padding: 0.5em 2em;
+  padding: 0.5rem 2rem;
   border: none;
-  border-radius: 1em;
+  border-radius: 1rem;
   background-color: var(--secondary_text_color);
   cursor: pointer;
 }
