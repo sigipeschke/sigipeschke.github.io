@@ -198,6 +198,8 @@
     </div>
     
     <script>
+        const cloudContainer = document.querySelector('span.skills-sphere')
+
         const texts = [
             'HTML', 'CSS', 
             'JAVASCRIPT', 'PYTHON',
@@ -208,10 +210,9 @@
             'NUMPY', 'SCIPY', 'PANDAS'
         ];
         
-        var width = window.innerWidth
-        const options = {
+        var options = {
             // Sphere radius in px
-            radius: width/5,
+            radius: window.innerWidth/5,
 
             // Animation speed
             // Slow, Normal, Fast
@@ -224,7 +225,30 @@
             // Interaction with mouse
             keep: true
         }
-        var skillsTagCloud = TagCloud('.skills-sphere', texts, options);
+        
+        var skillsTagCloud = TagCloud('.skills-sphere', texts, options)
+
+        window.addEventListener('resize', () => {
+            cloudContainer.removeChild(cloudContainer.firstChild)
+
+            options = {
+                // Sphere radius in px
+                radius: window.innerWidth/5,
+
+                // Animation speed
+                // Slow, Normal, Fast
+                maxSpeed: 'fast',
+                initSpeed: 'fast',
+
+                // Rolling direction [0 (top) , 90 (left), 135 (right-bottom)] 
+                direction: 135,
+
+                // Interaction with mouse
+                keep: true
+            }
+
+            skillsTagCloud = TagCloud('.skills-sphere', texts, options)
+        })
     </script>
 </body>
 </html>

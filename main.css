@@ -288,35 +288,16 @@ body {
 
 .skills-page .skills-sphere {
   position: absolute;
-  top: 50%;
+  top: 25%;
   right: 5%;
 }
 
 .skills-page .tagcloud {
   font-weight: 600;
   font-family: 'Poppins', cursive;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   letter-spacing: 1px;
   color:var(--secondary_text_color)
-}
-
-@media only screen and (min-width: 999px) {
-  .skills-page .skills-sphere{
-    position: absolute;
-    top: 25%;
-    right: 5%;
-  }
-
-  .skills-page .tagcloud {
-    font-size: 1.2rem;
-  }
-
-  .skills-page .tagcloud--item:hover {
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: #FFC300 ;
-    cursor: default;
-  }
 }
 
 .projects-page {
