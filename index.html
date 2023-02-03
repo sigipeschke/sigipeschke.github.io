@@ -28,7 +28,8 @@
     <canvas id="trail-canvas"></canvas>
     <script src="./trail.js"></script>
 
-    <div id="enter-portfolio-div" class="home-page-intro"></div>
+    <div id="enter-portfolio-billboard-div"></div>
+    <div id="enter-portfolio-div"></div>
 
     <script type="module">
 import * as THREE from 'three'
@@ -43,12 +44,22 @@ const loadingManager = new THREE.LoadingManager( () => {
 function onTransitionEnd( event ) {
     event.target.remove();
     
+    const enterBCTA = document.createElement('a')
+    enterBCTA.setAttribute('href', './about.html')
+
+    const enterBIMG = document.createElement('img')
+    enterBIMG.setAttribute('src', '/static/images/home/billboard.png')
+
+    enterBCTA.appendChild(enterBIMG)
+
+    const enterBDIV = document.getElementById('enter-portfolio-billboard-div')
+    enterBDIV.appendChild(enterBCTA)
+    //
     const enterCTA = document.createElement('a')
     enterCTA.setAttribute('href', './about.html')
 
     const enterIMG = document.createElement('img')
-    enterIMG.setAttribute('class', 'billboard')
-    enterIMG.setAttribute('src', '/static/images/home/billboard.png')
+    enterIMG.setAttribute('src', '/static/images/home/enter.png')
 
     enterCTA.appendChild(enterIMG)
 

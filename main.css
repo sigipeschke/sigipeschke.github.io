@@ -157,18 +157,28 @@ body {
   overflow: hidden;
 }
 
-.home-page-intro {
-  top: 2%;
-  width: 100%;
+#enter-portfolio-billboard-div {
   position: absolute;
+  top: -2%;
+  width: 100%;
   display: flex;
   z-index: 900;
   justify-content: center;
   align-items: center;
 }
 
-.home-page-intro .billboard {
+#enter-portfolio-billboard-div img {
   scale: 0.75;
+}
+
+#enter-portfolio-div {
+  position: absolute;
+  bottom: 2%;
+  width: 100%;
+  display: flex;
+  z-index: 900;
+  justify-content: center;
+  align-items: center;
 }
 
 #trail-canvas {
@@ -184,7 +194,7 @@ body {
 .about-page .hero {
   display: flex;
   width: 100%;
-  z-index: 102;
+  z-index: 999;
 }
 
 .about-page .hero h1 {
@@ -218,6 +228,13 @@ body {
   font-size: 1.2rem;
   text-align: left;
   padding-bottom: 2rem;
+}
+
+.about-page canvas.webgl {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  z-index: 100;
 }
 
 .skills-page {
@@ -625,24 +642,38 @@ body {
   overflow: hidden;
 }
 
-.home-page-intro {
-  top: 2%;
-  width: 100%;
+#enter-portfolio-billboard-div {
   position: absolute;
+  top: -5%;
+  width: 100%;
   display: flex;
   z-index: 900;
   justify-content: center;
   align-items: center;
 }
 
+#enter-portfolio-billboard-div img {
+  scale: 0.4;
+}
+
+#enter-portfolio-div {
+  position: absolute;
+  bottom: 2%;
+  width: 100%;
+  display: flex;
+  z-index: 900;
+  justify-content: center;
+  align-items: center;
+}
+
+#enter-portfolio-div img {
+  scale: 0.5;
+}
+
 #trail-canvas {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.home-page-intro .billboard {
-  scale: 0.4;
 }
 
 .about-page {
@@ -682,14 +713,22 @@ body {
 
 .about-page canvas.webgl {
   position: absolute;
-  top: 52%;
+  top: 65%;
   left: 0;
+}
+
+.about-page canvas {
+  pointer-events: none;
 }
 
 .skills-page {
   overflow-x: hidden;
   overflow-y: scroll;
   background-color: var(--primary_bg_color);
+}
+
+.skills-page canvas {
+  pointer-events: none;
 }
 
 .skills-page .hero {
@@ -861,6 +900,7 @@ body {
 
 .resume-page {
   overflow: hidden;
+  background-color: white;
 }
 
 .resume-page .resume-container {
@@ -872,6 +912,10 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   background-color: var(--primary_bg_color);
+}
+
+.contact-page canvas {
+  pointer-events: none;
 }
 
 .contact-page .page-container {
@@ -951,7 +995,7 @@ body {
 }
 
 .contact-page .page-container .contact-form .msg-field{
-  grid-row: span 10;
+  grid-row: span 6;
   font-size: 0.7rem;
   width: 80%;
 }
