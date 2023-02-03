@@ -23,7 +23,7 @@ class Particle{
     constructor() {
         this.x = mouse.x
         this.y = mouse.y
-        this.size = Math.random() * 3 + 0.1
+        this.size = Math.random() * 4 + 0.1
         this.speedX = Math.random() * 2 - 1
         this.speedY = Math.random() * 2 - 1
         this.color = 'hsl(' + hue + ', 100%, 50%)'
@@ -51,7 +51,7 @@ function handleParticle() {
             const dx = spots[i].x - spots[j].x
             const dy = spots[i].y - spots[j].y
             const distance = Math.sqrt(dx*dx + dy*dy)
-            if(distance < 90) {
+            if(distance < 90 && j-i < 10) {
                 ctx.beginPath()
                 ctx.strokeStyle = spots[i].color
                 ctx.lineWidth = spots[i].size / 10

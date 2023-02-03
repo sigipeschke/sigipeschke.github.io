@@ -105,6 +105,7 @@ scene.background = bgTexture
 
 // Objects
 const sunGeo = new THREE.SphereGeometry(10, 64, 64)
+const sunLightGeo = new THREE.SphereGeometry(12.5, 64, 64)
 const mercuryGeo = new THREE.SphereGeometry(1.5, 64, 64)
 const venusGeo = new THREE.SphereGeometry(3.8, 64, 64)
 const earthGeo = new THREE.SphereGeometry(4, 64, 64)
@@ -121,6 +122,32 @@ const neptuneGeo = new THREE.SphereGeometry(5, 64, 64)
 const sunMat = new THREE.MeshStandardMaterial()
 sunMat.map = sunTexture
 sunMat.normalMap = sunMap
+
+const sunShaderVert = `
+    varying vec3 vertexNormal;
+
+    void main() {
+        vertexNormal = normalize(normalMatrix * normal);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`
+
+const sunShaderFrag = `
+    varying vec3 vertexNormal;
+
+    void main() {
+        float intensity = pow(0.5 - dot(vertexNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+
+        gl_FragColor = vec4(1.0, 0.5, 0.2, 1.0) * intensity;
+    }
+`
+const sunLightMat = new THREE.ShaderMaterial({
+    vertexShader: sunShaderVert,
+    fragmentShader: sunShaderFrag,
+    blending: THREE.AdditiveBlending,
+    side: THREE.BackSide
+})
 
 const mercuryMat = new THREE.MeshStandardMaterial()
 mercuryMat.map = mercuryTexture
@@ -171,6 +198,10 @@ const astromanMat = new THREE.SpriteMaterial({
 const sun = new THREE.Mesh(sunGeo, sunMat)
 sun.position.set(0, 0, 0)
 scene.add(sun)
+
+const sunLight = new THREE.Mesh(sunLightGeo, sunLightMat)
+sunLight.position.set(0, 0, 0)
+scene.add(sunLight)
 
 const mercury = new THREE.Mesh(mercuryGeo, mercuryMat)
 mercury.position.set(15, 0, 0)
@@ -245,9 +276,10 @@ window.addEventListener('resize', () =>
 /**
  * Camera
  */
+
 // Base camera
-const camera = new THREE.PerspectiveCamera(90, sizes.width / sizes.height, 1, 1000)
-camera.position.set(0, 60, 140)
+const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 1, 1000)
+camera.position.set(0, 60, 160)
 camera.lookAt(0, 0, 0)
 scene.add(camera)
 
@@ -327,20 +359,20 @@ const tick = () =>
     uranus.position.set(135 * Math.cos(thetaU), 0, -135 * Math.sin(thetaU))
     neptune.position.set(155 * Math.cos(thetaN), 0, -155 * Math.sin(thetaN))
 
-    if (astroman.position.x < astroPos.x) {
-        astromanTexture.flipY = false
-        astromanTexture.needsUpdate = true
-        astromanMat.rotation = Math.PI
-        astroman.center = new THREE.Vector2(0.3, 1.1)
-    } else if (astroman.position.x > astroPos.x) {
-        astromanTexture.flipY = true
-        astromanTexture.needsUpdate = true
-        astromanMat.rotation = 0
-        astroman.center = new THREE.Vector2(0.3, -0.1)
-    }
-    astroman.position.x = astroPos.x
-    astroman.position.y = astroPos.y
-    astroman.position.z = astroPos.z
+    // if (astroman.position.x < astroPos.x) {
+    //     astromanTexture.flipY = false
+    //     astromanTexture.needsUpdate = true
+    //     astromanMat.rotation = Math.PI
+    //     astroman.center = new THREE.Vector2(0.3, 1.1)
+    // } else if (astroman.position.x > astroPos.x) {
+    //     astromanTexture.flipY = true
+    //     astromanTexture.needsUpdate = true
+    //     astromanMat.rotation = 0
+    //     astroman.center = new THREE.Vector2(0.3, -0.1)
+    // }
+    // astroman.position.x = astroPos.x
+    // astroman.position.y = astroPos.y
+    // astroman.position.z = astroPos.z
 
     // Render
     renderer.render(scene, camera)
