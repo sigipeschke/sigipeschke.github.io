@@ -279,6 +279,10 @@ window.addEventListener('resize', () =>
 
 // Base camera
 const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 1, 1000)
+if (window.innerWidth < 500) {
+    camera.fov = 75
+    camera.updateProjectionMatrix()
+}
 camera.position.set(0, 60, 160)
 camera.lookAt(0, 0, 0)
 scene.add(camera)

@@ -34,9 +34,10 @@
                 height: window.innerHeight,
                 transparent: false,
                 antialias: true,
-                resizeTo: window
+                resizeTo: window,
+                backgroundAlpha: 0
             });
-            app.renderer.background.color = 0x152238;
+            // app.renderer.background.color = 0x152238;
             app.renderer.view.style.position = 'absolute';
             document.body.appendChild(app.view);
 
@@ -49,7 +50,7 @@
 
             let starAmount = 5000;
             if (window.innerWidth < 769) {
-                const starAmount = 2000;
+                starAmount = 500;
             } 
             let cameraZ = 0;
             const fov = 30;

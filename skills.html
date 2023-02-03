@@ -27,9 +27,10 @@
                 height: window.innerHeight,
                 transparent: false,
                 antialias: true,
-                resizeTo: window
+                resizeTo: window,
+                backgroundAlpha: 0
             });
-            app.renderer.background.color = 0x152238;
+            //app.renderer.background.color = 0x152238;
             app.renderer.view.style.position = 'absolute';
             document.body.appendChild(app.view);
 
@@ -42,7 +43,7 @@
 
             let starAmount = 5000;
             if (window.innerWidth < 769) {
-                const starAmount = 2000;
+                starAmount = 500;
             } 
             let cameraZ = 0;
             const fov = 30;
@@ -210,9 +211,12 @@
             'NUMPY', 'SCIPY', 'PANDAS'
         ];
         
+        var rSize = window.innerWidth/5
+        if (window.innerWidth < 500) {rSize = window.innerWidth / 2.1}
+
         var options = {
             // Sphere radius in px
-            radius: window.innerWidth/5,
+            radius: rSize,
 
             // Animation speed
             // Slow, Normal, Fast
@@ -231,9 +235,12 @@
         window.addEventListener('resize', () => {
             cloudContainer.removeChild(cloudContainer.firstChild)
 
+            rSize = window.innerWidth/5
+            if (window.innerWidth < 500) {rSize = window.innerWidth / 2.1}
+
             options = {
                 // Sphere radius in px
-                radius: window.innerWidth/5,
+                radius: rSize,
 
                 // Animation speed
                 // Slow, Normal, Fast
