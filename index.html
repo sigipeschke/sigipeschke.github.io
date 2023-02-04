@@ -42,7 +42,7 @@ const loadingManager = new THREE.LoadingManager( () => {
 })
 
 function onTransitionEnd( event ) {
-    event.target.remove();
+    event.target.remove()
     
     const enterBCTA = document.createElement('a')
     enterBCTA.setAttribute('href', './about.html')
@@ -59,7 +59,7 @@ function onTransitionEnd( event ) {
     enterCTA.setAttribute('href', './about.html')
 
     const enterIMG = document.createElement('img')
-    enterIMG.setAttribute('src', '/static/images/home/enter.png')
+    enterIMG.setAttribute('src', '/static/images/home/enter-rocket.png')
 
     enterCTA.appendChild(enterIMG)
 
@@ -67,7 +67,7 @@ function onTransitionEnd( event ) {
     enterDIV.appendChild(enterCTA)
 }
 
-// Load Textures
+// Textures
 const textureLoader = new THREE.TextureLoader(loadingManager)
 
 const bgTexture = textureLoader.load('/static/images/home/milky-way.jpg')
@@ -104,8 +104,6 @@ const uranusMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
 const neptuneTexture = textureLoader.load('/static/textures/neptune-texture.jpg')
 const neptuneMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
 
-const astromanTexture = textureLoader.load('/static/images/home/astro-rocket.png-NOSHOW')
-
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -117,15 +115,34 @@ scene.background = bgTexture
 // Objects
 const sunGeo = new THREE.SphereGeometry(10, 64, 64)
 const sunLightGeo = new THREE.SphereGeometry(12.5, 64, 64)
-const mercuryGeo = new THREE.SphereGeometry(1.5, 64, 64)
+const mercuryGeo = new THREE.SphereGeometry(1.8, 64, 64)
 const venusGeo = new THREE.SphereGeometry(3.8, 64, 64)
 const earthGeo = new THREE.SphereGeometry(4, 64, 64)
-const marsGeo = new THREE.SphereGeometry(2.2, 64, 64)
+const moonGeo = new THREE.SphereGeometry(1.5, 64, 64)
+const marsGeo = new THREE.SphereGeometry(2.5, 64, 64)
 const jupiterGeo = new THREE.SphereGeometry(8, 64, 64)
 const saturnGeo = new THREE.SphereGeometry(7, 64, 64)
 const saturnRingGeo = new THREE.TorusGeometry(12, 1.4, 2, 64)
-const uranusGeo = new THREE.SphereGeometry(5.5, 64, 64)
+const uranusGeo = new THREE.SphereGeometry(5.2, 64, 64)
 const neptuneGeo = new THREE.SphereGeometry(5, 64, 64)
+
+const asteroid1Geo = new THREE.BufferGeometry()
+const asteroid1Cnt = 2000
+const asteroid2Geo = new THREE.BufferGeometry()
+const asteroid2Cnt = 6000
+
+// Position - Distance
+const sunDist = 0
+const mercuryDist = 20
+const venusDist = 35
+const earthDist = 50
+const marsDist = 80
+const asteroid1Dist = 95
+const jupiterDist = 120
+const saturnDist = 160
+const uranusDist = 210
+const neptuneDist = 240
+const asteroid2Dist = 270
 
 
 // Materials
@@ -143,7 +160,6 @@ const sunShaderVert = `
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
 `
-
 const sunShaderFrag = `
     varying vec3 vertexNormal;
 
@@ -199,62 +215,83 @@ const neptuneMat = new THREE.MeshStandardMaterial()
 neptuneMat.map = neptuneTexture
 neptuneMat.normalMap = neptuneMap
 
-const astromanMat = new THREE.SpriteMaterial({
-    map: astromanTexture,
-    sizeAttenuation: false
+const asteroidMat = new THREE.PointsMaterial({
+    size: 0.05,
+    color: 0xb5b5b5
 })
-
 
 // Mesh
 const sun = new THREE.Mesh(sunGeo, sunMat)
-sun.position.set(0, 0, 0)
+sun.position.set(sunDist, 0, 0)
 scene.add(sun)
 
 const sunLight = new THREE.Mesh(sunLightGeo, sunLightMat)
-sunLight.position.set(0, 0, 0)
+sunLight.position.set(sunDist, 0, 0)
 scene.add(sunLight)
 
 const mercury = new THREE.Mesh(mercuryGeo, mercuryMat)
-mercury.position.set(15, 0, 0)
+mercury.position.set(mercuryDist, 0, 0)
 scene.add(mercury)
 
 const venus = new THREE.Mesh(venusGeo, venusMat)
-venus.position.set(25, 0, 0)
+venus.position.set(venusDist, 0, 0)
 scene.add(venus)
 
 const earth = new THREE.Mesh(earthGeo, earthMat)
-earth.position.set(40, 0, 0)
+earth.position.set(earthDist, 0, 0)
 scene.add(earth)
 
+const moon = new THREE.Mesh(moonGeo, moonMat)
+moon.position.set(earthDist + 6, 0, 0)
+scene.add(moon)
+
 const mars = new THREE.Mesh(marsGeo, marsMat)
-mars.position.set(55, 0, 0)
+mars.position.set(marsDist, 0, 0)
 scene.add(mars)
 
 const jupiter = new THREE.Mesh(jupiterGeo, jupiterMat)
-jupiter.position.set(75, 0, 0)
+jupiter.position.set(jupiterDist, 0, 0)
 scene.add(jupiter)
 
 const saturn = new THREE.Mesh(saturnGeo, saturnMat)
-saturn.position.set(100, 0, 0)
+saturn.position.set(saturnDist, 0, 0)
 scene.add(saturn)
 
 const saturnRing = new THREE.Mesh(saturnRingGeo, saturnRingMat)
-saturnRing.position.set(100, 0, 0)
+saturnRing.position.set(saturnDist, 0, 0)
 saturnRing.rotateX(110 * Math.PI / 180)
 scene.add(saturnRing)
 
 const uranus = new THREE.Mesh(uranusGeo, uranusMat)
-uranus.position.set(135, 0, 0)
+uranus.position.set(uranusDist, 0, 0)
 scene.add(uranus)
 
 const neptune = new THREE.Mesh(neptuneGeo, neptuneMat)
-neptune.position.set(155, 0, 0)
+neptune.position.set(neptuneDist, 0, 0)
 scene.add(neptune)
 
-const astroman = new THREE.Sprite(astromanMat)
-astroman.scale.set(0.25, 0.25, 1)
-astroman.position.set(4, 60, 135)
-scene.add(astroman)
+const asteroid1PosArray = new Float32Array(asteroid1Cnt * 3)
+for (let i = 0; i < asteroid1Cnt * 3; i = i+3) {
+    let asteroid1Angle = 2*Math.PI*Math.random()
+    asteroid1PosArray[i] = asteroid1Dist * Math.cos(asteroid1Angle) + 4*Math.random()
+    asteroid1PosArray[i+1] = 2*Math.random()
+    asteroid1PosArray[i+2] = asteroid1Dist * -Math.sin(asteroid1Angle) + 4*Math.random()
+}
+asteroid1Geo.setAttribute('position', new THREE.BufferAttribute(asteroid1PosArray, 3))
+const asteroids1 = new THREE.Points(asteroid1Geo, asteroidMat)
+scene.add(asteroids1)
+
+const asteroid2PosArray = new Float32Array(asteroid2Cnt * 3)
+for (let i = 0; i < asteroid2Cnt * 3; i = i+3) {
+    let asteroid2Angle = 2*Math.PI*Math.random()
+    asteroid2PosArray[i] = asteroid2Dist * Math.cos(asteroid2Angle) + 30*Math.random()
+    asteroid2PosArray[i+1] = 10*Math.random()
+    asteroid2PosArray[i+2] = asteroid2Dist * -Math.sin(asteroid2Angle) + 30*Math.random()
+}
+asteroid2Geo.setAttribute('position', new THREE.BufferAttribute(asteroid2PosArray, 3))
+const asteroids2 = new THREE.Points(asteroid2Geo, asteroidMat)
+scene.add(asteroids2)
+
 
 // Lights
 
@@ -287,14 +324,13 @@ window.addEventListener('resize', () =>
 /**
  * Camera
  */
-
 // Base camera
 const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 1, 1000)
 if (window.innerWidth < 500) {
-    camera.fov = 75
+    camera.fov = 90
     camera.updateProjectionMatrix()
 }
-camera.position.set(0, 60, 160)
+camera.position.set(0, 60, 250)
 camera.lookAt(0, 0, 0)
 scene.add(camera)
 
@@ -314,29 +350,13 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 let thetaMe = 0.0
 let thetaV = 3.5
 let thetaE = 1.0
+let thetaMo = 0.0
+let phiMo = 0.0
 let thetaMa = 1.8
 let thetaJ = 6.0
 let thetaS = 3.5
 let thetaU = 0.0
 let thetaN = 5.8
-
-document.addEventListener('mousemove', moveAstroMan)
-
-let raycaster = new THREE.Raycaster() //  (+-13, 47, 135) ^ (+-5, 62, 135)
-let astroNorm = new THREE.Vector3()
-astroNorm.set(0, 0, 1)
-let astroPlane = new THREE.Plane(astroNorm, -135)
-let astroPos = new THREE.Vector3(4, 60, 135)
-
-function moveAstroMan(event) {
-    let pointer = new THREE.Vector2(
-        (event.clientX / window.innerWidth) * 2 - 1,
-        -(event.clientY / window.innerHeight) * 2 + 1
-    )
-    raycaster.setFromCamera(pointer, camera)
-    raycaster.ray.intersectPlane(astroPlane, astroPos)
-    // console.log(astroman.position, astroPos)
-}
 
 const clock = new THREE.Clock()
 
@@ -347,9 +367,9 @@ const tick = () =>
     // Update objects
     sun.rotation.y = 0.5 * elapsedTime
     mercury.rotation.y = 1.5 * elapsedTime
-    venus.rotation.y = 2 * elapsedTime
+    venus.rotation.y = 4 * elapsedTime
     earth.rotation.y = 6 * elapsedTime
-    mars.rotation.y = 2 * elapsedTime
+    mars.rotation.y = 4 * elapsedTime
     jupiter.rotation.y = 1.5 * elapsedTime
     saturn.rotation.y = 2.5 * elapsedTime
     uranus.rotation.y = 2.5 * elapsedTime
@@ -358,36 +378,24 @@ const tick = () =>
     thetaMe += 0.005 *2*Math.PI
     thetaV += 0.0025 *2*Math.PI
     thetaE += 0.002 *2*Math.PI
+    thetaMo += 0.004 *2*Math.PI
+    phiMo += 0.002 *2*Math.PI
     thetaMa += 0.001 *2*Math.PI
     thetaJ += 0.0007 *2*Math.PI
     thetaS += 0.0006 *2*Math.PI
     thetaU += 0.0003 *2*Math.PI
     thetaN += 0.0002 *2*Math.PI
     
-    mercury.position.set(15 * Math.cos(thetaMe), 0, -15 * Math.sin(thetaMe))
-    venus.position.set(25 * Math.cos(thetaV), 0, -25 * Math.sin(thetaV))
-    earth.position.set(40 * Math.cos(thetaE), 0, -40 * Math.sin(thetaE))
-    mars.position.set(55 * Math.cos(thetaMa), 0, -55 * Math.sin(thetaMa))
-    jupiter.position.set(75 * Math.cos(thetaJ), 0, -75 * Math.sin(thetaJ))
-    saturn.position.set(100 * Math.cos(thetaS), 0, -100 * Math.sin(thetaS))
-    saturnRing.position.set(100 * Math.cos(thetaS), 0, -100 * Math.sin(thetaS))
-    uranus.position.set(135 * Math.cos(thetaU), 0, -135 * Math.sin(thetaU))
-    neptune.position.set(155 * Math.cos(thetaN), 0, -155 * Math.sin(thetaN))
-
-    // if (astroman.position.x < astroPos.x) {
-    //     astromanTexture.flipY = false
-    //     astromanTexture.needsUpdate = true
-    //     astromanMat.rotation = Math.PI
-    //     astroman.center = new THREE.Vector2(0.3, 1.1)
-    // } else if (astroman.position.x > astroPos.x) {
-    //     astromanTexture.flipY = true
-    //     astromanTexture.needsUpdate = true
-    //     astromanMat.rotation = 0
-    //     astroman.center = new THREE.Vector2(0.3, -0.1)
-    // }
-    // astroman.position.x = astroPos.x
-    // astroman.position.y = astroPos.y
-    // astroman.position.z = astroPos.z
+    mercury.position.set(mercuryDist * Math.cos(thetaMe), 0, -mercuryDist * Math.sin(thetaMe))
+    venus.position.set(venusDist * Math.cos(thetaV), 0, -venusDist * Math.sin(thetaV))
+    earth.position.set(earthDist * Math.cos(thetaE), 0, -earthDist * Math.sin(thetaE))
+    moon.position.set(earthDist * Math.cos(thetaE) + (6 * Math.cos(thetaMo)), 6 * Math.sin(phiMo), -earthDist * Math.sin(thetaE) + (-6 * Math.sin(thetaMo)))
+    mars.position.set(marsDist * Math.cos(thetaMa), 0, -marsDist * Math.sin(thetaMa))
+    jupiter.position.set(jupiterDist * Math.cos(thetaJ), 0, -jupiterDist * Math.sin(thetaJ))
+    saturn.position.set(saturnDist * Math.cos(thetaS), 0, -saturnDist * Math.sin(thetaS))
+    saturnRing.position.set(saturnDist * Math.cos(thetaS), 0, -saturnDist * Math.sin(thetaS))
+    uranus.position.set(uranusDist * Math.cos(thetaU), 0, -uranusDist * Math.sin(thetaU))
+    neptune.position.set(neptuneDist * Math.cos(thetaN), 0, -neptuneDist * Math.sin(thetaN))
 
     // Render
     renderer.render(scene, camera)

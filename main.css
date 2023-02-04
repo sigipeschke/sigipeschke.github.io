@@ -181,6 +181,10 @@ body {
   align-items: center;
 }
 
+#enter-portfolio-div img {
+  scale: 0.65;
+}
+
 #trail-canvas {
   position: absolute;
   top: 0;
@@ -214,7 +218,7 @@ body {
   left: 5%;
   width: 40%;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   text-align: left;
   padding-bottom: 2rem;
 }
@@ -225,7 +229,7 @@ body {
   left: 55%;
   width: 40%;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   text-align: left;
   padding-bottom: 2rem;
 }
@@ -488,7 +492,7 @@ body {
   border-radius: 50%;
 }
 
-.contact-page .page-container .contact-hero .contacts .fa-google {
+.contact-page .page-container .contact-hero .contacts .fa-envelope-o {
   background: #dd4b39;
   color: white;
 }
@@ -955,7 +959,7 @@ body {
   border-radius: 50%;
 }
 
-.contact-page .page-container .contact-hero .contacts .fa-google {
+.contact-page .page-container .contact-hero .contacts .fa-envelope-o {
   background: #dd4b39;
   color: white;
 }
