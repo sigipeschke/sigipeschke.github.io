@@ -14,11 +14,11 @@ html {
   html {font-size: 16px;}
 }
 
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: 1700px) {
   html {font-size: 14px;}
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1300px) {
   html {font-size: 12px;}
 }
 
@@ -200,42 +200,115 @@ body {
 }
 
 .about-page .hero {
-  display: flex;
+  position: relative;
   width: 100%;
-  z-index: 999;
 }
 
 .about-page .hero h1 {
   position: absolute;
+  width: 100%;
   top: 10%;
-  left: 10%;
   font-size: 5rem;
   margin-bottom: 0.2rem;
+  text-align: center;
   color: white;
-  text-shadow: 15px 15px var(--secondary_text_color);
+  text-shadow: 10px 10px var(--secondary_text_color);
   letter-spacing: 0.05rem;
 }
 
-.about-page .hero .desc1 {
+.about-page .hero .about-s {
+  display: flex;
   position: absolute;
-  top: calc(22% + 5rem);
-  left: 5%;
-  width: 40%;
-  color: white;
-  font-size: 1.3rem;
-  text-align: left;
-  padding-bottom: 2rem;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 999;
 }
 
-.about-page .hero .desc2 {
+.about-page .hero .about-s .about-r-poem {
   position: absolute;
-  top: 12%;
-  left: 55%;
-  width: 40%;
+  top: 16%;
+  left: 50%;
+  transform: translate(-50%, 0);
   color: white;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.about-page .hero .about-s .about-rcontainer {
+  position: absolute;
+  top: 5%;
+  left: 20%;
+  transform: rotate(20deg);
+}
+
+.about-page .hero .about-s #about-rFlag {
+  position: absolute;
+  top: -6rem;
+  left: 5.25rem;
+  height: 8rem;
+  transform: rotate(-20deg);
+}
+.about-page .hero .about-s #about-r1 {
+  position: absolute;
+  top: 0;
+} .about-page .hero .about-s #about-r1 img {height: 12rem;}
+.about-page .hero .about-s #about-r2 {
+  position: absolute;
+  top: calc(12rem + 5px);
+} .about-page .hero .about-s #about-r2 img {height: 12rem;}
+.about-page .hero .about-s #about-r3 {
+  position: absolute;
+  top: calc((12rem + 5px)*2);
+} .about-page .hero .about-s #about-r3 img {height: 12rem;}
+.about-page .hero .about-s #about-r4 {
+  position: absolute;
+  top: calc((12rem + 5px)*3);
+} .about-page .hero .about-s #about-r4 img {height: 12rem;}
+
+.about-page .hero .about-s #about-rFlame {
+  position: absolute;
+  top: calc((12rem + 5px)*3.8);
+  height: 23rem;
+}
+
+.about-page .hero .about-s #about-li1 {
+  visibility: hidden;
+}
+.about-page .hero .about-s #about-li2 {
+  visibility: hidden;
+}
+.about-page .hero .about-s #about-li3 {
+  visibility: hidden;
+}
+.about-page .hero .about-s #about-li4 {
+  visibility: hidden;
+}
+
+.about-page .hero .about-s .about-li {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 35%;
+  z-index: 999;
+  text-align: center;
+  color: white;
+}
+
+.about-page .hero .about-s .about-li img {
+  width: 15rem;
+  filter: invert(1);
+}
+
+.about-page .hero .about-s .about-li h3 {
+  font-size: 2rem;
+  margin: 0 0;
+}
+
+.about-page .hero .about-s .about-li p {
+  font-size: 1.4rem;
   text-align: left;
-  padding-bottom: 2rem;
 }
 
 .about-page canvas.webgl {
@@ -262,15 +335,15 @@ body {
   font-size: 5rem;
   margin-bottom: 0.2rem;
   color: white;
-  text-shadow: 15px 15px var(--secondary_text_color);
+  text-shadow: 10px 10px var(--secondary_text_color);
   letter-spacing: 0.05rem;
 }
 
 .skills-page .hero .desc {
   position: absolute;
   top: calc(20% + 5rem);
-  left: 5%;
-  width: 50%;
+  left: 7.5%;
+  width: 52.5%;
   color: white;
   font-size: 1.3rem;
   text-align: left;
@@ -281,9 +354,9 @@ body {
   position: absolute;
   top: 42%;
   left: 10%;
-  width: 45%;
+  width: 50%;
   display: grid;
-  grid-template-columns: repeat(3, 33%);
+  grid-template-columns: repeat(4, 25%);
   color: white;
 }
 
@@ -339,8 +412,13 @@ body {
   font-size: 3rem;
   margin-bottom: 0.2rem;
   color: white;
-  text-shadow: 15px 15px var(--secondary_text_color);
+  text-shadow: 10px 10px var(--secondary_text_color);
   letter-spacing: 0.05rem;
+}
+
+.projects-page .projects-container .projects-disclaimer {
+  font-size: 1.0rem;
+  color: rgb(255, 85, 85);
 }
 
 .projects-page .projects-container hr {
@@ -390,6 +468,11 @@ body {
   font-size: 1.2rem;
 }
 
+.projects-page .projects-container .project-R .desc a {
+  color: var(--secondary_text_color);
+  text-decoration: none;
+}
+
 .projects-page .projects-container .project-L {
   display: grid;
   grid-template-columns: repeat(2, 50%);
@@ -429,6 +512,11 @@ body {
   color: white;
   background-color: #1c2d4e;
   font-size: 1.2rem;
+}
+
+.projects-page .projects-container .project-L .desc a {
+  color: var(--secondary_text_color);
+  text-decoration: none;
 }
 
 .projects-page .projects-container .project-L .game-images {
@@ -701,27 +789,73 @@ body {
   text-align: center;
   margin-bottom: 3rem;
   color: white;
-  text-shadow: 15px 15px var(--secondary_text_color);
+  text-shadow: 10px 10px var(--secondary_text_color);
   letter-spacing: 0.05rem;
 }
 
-.about-page .hero .desc1 {
-  color: white;
-  font-size: 1.2rem;
-  text-align: left;
-  padding-bottom: 1rem;
+.about-page .hero .about-s {
+  display: block;
+  position: absolute;
+  top: 5%;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 900;
 }
 
-.about-page .hero .desc2 {
+.about-page .hero .about-s .about-r-poem {
+  display: none;
+}
+
+.about-page .hero .about-s .about-rcontainer {
+  display: none;
+}
+
+.about-page .hero .about-s .about-li {
+  z-index: 900;
+  text-align: center;
   color: white;
-  font-size: 1.2rem;
+}
+
+.about-page .hero .about-s .about-li img {
+  width: 10rem;
+  filter: invert(1);
+}
+
+.about-page .hero .about-s .about-li h3 {
+  font-size: 2rem;
+  margin: 15px 0px;
+}
+
+.about-page .hero .about-s .about-li p {
+  font-size: 1.4rem;
   text-align: left;
-  padding-bottom: 2rem;
+  padding: 0px 15px;
+}
+
+.about-page #about-li1 {
+  position: absolute;
+  top: 15%;
+}
+
+.about-page #about-li2 {
+  position: absolute;
+  top: 53%;
+}
+
+.about-page #about-li3 {
+  position: absolute;
+  top: 90%;
+}
+
+.about-page #about-li4 {
+  position: absolute;
+  top: 120%;
 }
 
 .about-page canvas.webgl {
   position: absolute;
-  top: 60vh;
+  top: 130%;
   left: 0;
 }
 
@@ -749,7 +883,7 @@ body {
   font-size: 3.5rem;
   margin-bottom: 3rem;
   color: white;
-  text-shadow: 15px 15px var(--secondary_text_color);
+  text-shadow: 10px 10px var(--secondary_text_color);
   letter-spacing: 0.05rem;
 }
 
@@ -761,11 +895,12 @@ body {
 }
 
 .skills-card {
-  width: calc(100% - 30px);
+  width: 90%;
   display: grid;
-  grid-template-columns: 35% 31% 34%;
+  grid-template-columns: repeat(2, 50%);
   color: white;
   padding: 0px 15px;
+  margin: 0px 0 0 10%;
 }
 
 .skills-card ul {
@@ -815,8 +950,15 @@ body {
   text-align: center;
   margin-bottom: 0.2rem;
   color: white;
-  text-shadow: 15px 15px var(--secondary_text_color);
+  text-shadow: 10px 10px var(--secondary_text_color);
   letter-spacing: 0.05rem;
+}
+
+.projects-page .projects-container .projects-disclaimer {
+  font-size: 1.0rem;
+  color: rgb(255, 85, 85);
+  width: 100%;
+  text-align: center;
 }
 
 .projects-page .projects-container hr {
@@ -857,6 +999,11 @@ body {
   font-size: 1.2rem;
 }
 
+.projects-page .projects-container .project-R .desc a {
+  color: var(--secondary_text_color);
+  text-decoration: none;
+}
+
 .projects-page .projects-container .project-L {
   display: inline-block;
   width: 100%;
@@ -888,6 +1035,11 @@ body {
   color: white;
   background-color: #1c2d4e;
   font-size: 1.2rem;
+}
+
+.projects-page .projects-container .project-L .desc a {
+  color: var(--secondary_text_color);
+  text-decoration: none;
 }
 
 .projects-page .projects-container .project-L .game-images {

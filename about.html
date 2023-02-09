@@ -118,14 +118,60 @@
 
     <div class="hero">
         <h1>About Sigi</h1>
-        <p class="desc1">
-            I am a highly motivated, self-taught computer science professional with a background in physics and a passion for solving complex problems. As a graduate of the University of Calgary with a degree in physics, I have a unique perspective on problem-solving and analytical thinking that I bring to my work in computer science.
-        </p>
-        <p class="desc2">
-            My background in physics has given me a strong foundation in mathematical modeling and problem solving. This has allowed me to approach complex computer science problems in a methodical and logical manner, and to devise efficient solutions. Furthermore, my physics background has also made me a very adaptable learner, able to quickly pick up new technologies and programming languages.
-            <br><br>
-            As a professional, I am dedicated to making a positive impact in the world and enhancing the lives of those around me. I am excited to bring my skills, passion, and analytical thinking to a new role where I can continue to grow and develop as a computer scientist. I am confident that my unique background and experiences make me a valuable asset to any team and I am eager to work with a forward-thinking company that values creative problem solving and continuous learning.
-        </p>
+
+        <div class="about-s">
+            <div class="about-rcontainer">
+                <a id="about-r1" class="about-r">
+                    <img src="/static/images/about/starship1.png">
+                </a>
+                <a id="about-r2" class="about-r">
+                    <img src="/static/images/about/starship2.png">
+                </a>
+                <a id="about-r3" class="about-r">
+                    <img src="/static/images/about/starship3.png">
+                </a>
+                <a id="about-r4" class="about-r">
+                    <img src="/static/images/about/starship4.png">
+                </a>
+                <img id="about-rFlame" src="/static/images/about/flame.png">
+            </div>
+            
+            <p class="about-r-poem">
+                I am a rocket, powerful, glamorous. <br>
+                A marvel of engineering, built for the long haul. <br>
+                With every launch, I reach for the stars. <br>
+                Soaring through the skies, leaving my scars.
+            </p>
+
+            <div id="about-li1" class="about-li">
+                <img src="/static/images/about/aspiring.png">
+                <h3>Grand Aspirations</h3>
+                <p>
+                    My mission is to leave a positive impact in the world by enhancing the lives of those around me. I am confident that my unique background and experiences make me a valuable asset to any team and I am eager to work with a forward-thinking company that values creative problem solving and continuous learning.
+                </p>
+            </div>
+            <div id="about-li2" class="about-li">
+                <img src="/static/images/about/improving.png">
+                <h3>Always Improving</h3>
+                <p>
+                    I strongly believe in striving to become the best version of myself that I can. As such, I seek out new opportunities to improve my skills and knowledge within my passions. It is fundamental to my growth as a person and professional to learn something new every day.
+                </p>
+            </div>
+            <div id="about-li3" class="about-li">
+                <img src="/static/images/about/solving.png">
+                <h3>Problem Solving</h3>
+                <p>
+                    My background in physics has given me a strong foundation in mathematical modeling and problem solving. I approach complex challenges in a methodical and logical manner, to devise efficient solutions.
+                </p>
+            </div>
+            <div id="about-li4" class="about-li">
+                <img src="/static/images/about/exercise.png">
+                <h3>Fueled by Health</h3>
+                <p>
+                    My commitment to a healthy lifestyle is a cornerstone of my overall well-being. I maintain a clean diet and exercise regimen, and push my athleticism in sports I enjoy such as soccer, skiing, and badminton. Healthy body = healthy mind.
+                </p>
+            </div>
+        </div>
     </div>
 
     <canvas class="webgl"></canvas>
@@ -361,5 +407,46 @@ const tick = () =>
 tick()
     </script>
 
+    <script>
+        const activeFilter = 'invert(93%) sepia(13%) saturate(275%) hue-rotate(154deg) brightness(97%) contrast(95%)'
+
+        const r1 = document.getElementById('about-r1')
+        const li1 = document.getElementById('about-li1')
+        const r2 = document.getElementById('about-r2')
+        const li2 = document.getElementById('about-li2')
+        const r3 = document.getElementById('about-r3')
+        const li3 = document.getElementById('about-li3')
+        const r4 = document.getElementById('about-r4')
+        const li4 = document.getElementById('about-li4')
+
+        var activeR = r1
+        var activeLi = li1
+        r1.style.filter = activeFilter
+        li1.style.visibility = 'visible'
+
+        function activeHandler(r, l) {
+            activeR.style.filter = 'none'
+            activeLi.style.visibility = 'hidden'
+
+            r.style.filter = activeFilter
+            l.style.visibility = 'visible'
+
+            activeR = r
+            activeLi = l
+        }
+
+        r1.addEventListener('mouseover', () => {
+            activeHandler(r1, li1)
+        })
+        r2.addEventListener('mouseover', () => {
+            activeHandler(r2, li2)
+        })
+        r3.addEventListener('mouseover', () => {
+            activeHandler(r3, li3)
+        })
+        r4.addEventListener('mouseover', () => {
+            activeHandler(r4, li4)
+        })
+    </script>
 </body>
 </html>
