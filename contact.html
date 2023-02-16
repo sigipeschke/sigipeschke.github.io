@@ -137,24 +137,32 @@
                 <textarea name="message" class="msg-field" style="resize:none"></textarea>
                 <input type="submit" value="Send" class="submit-btn">
             </form>
+
+            <div id="form-success-msg">
+                <h3>Message Received!</h3>
+                <p>Thank you for contacting me, I will respond promptly.</p>
+            </div>
         </div>
     </div>
 
     <script type="text/javascript">
         window.onload = function() {
             document.getElementById('contact-form').addEventListener('submit', function(event) {
-                event.preventDefault();
+                event.preventDefault()
                 // generate a five digit number for the contact_number variable
-                this.contact_number.value = Math.random() * 100000 | 0;
+                this.contact_number.value = Math.random() * 100000 | 0
                 // these IDs from the previous steps
                 emailjs.sendForm('contact_me_service', 'contact_me_form', this)
                     .then(function() {
-                        window.alert('EMAIL SUCCESS!');
-                        console.log('EMAIL SUCCESS!');
+                        document.getElementById('contact-form').style.display = 'none'
+                        document.getElementById('form-success-msg').style.display = 'block'
+                        // window.alert('EMAIL SUCCESS!')
+                        console.log('EMAIL SUCCESS!')
                     }, function(error) {
-                        console.log('FAILED...', error);
-                    });
-            });
+                        window.alert('MESSAGE FAILED...')
+                        console.log('FAILED...', error)
+                    })
+            })
         }
     </script>
 

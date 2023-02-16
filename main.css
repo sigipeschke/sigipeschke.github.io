@@ -627,18 +627,18 @@ body {
 }
 
 .contact-page .page-container .contact-form .name-field{
-  font-size: 0.7rem;
+  font-size: 1.25rem;
   width: 60%;
 }
 
 .contact-page .page-container .contact-form .email-field{
-  font-size: 0.7em;
+  font-size: 1.25rem;
   width: 60%;
 }
 
 .contact-page .page-container .contact-form .msg-field{
   grid-row: span 10;
-  font-size: 0.7rem;
+  font-size: 1rem;
   width: 80%;
 }
 
@@ -657,6 +657,21 @@ body {
 
 .contact-page .page-container .contact-form .submit-btn:hover{
   font-size: 1.7rem;
+}
+
+.contact-page .page-container #form-success-msg {
+  color: white;
+  text-align: center;
+  display: none;
+  padding-top: 30%;
+}
+
+.contact-page .page-container #form-success-msg h3 {
+  font-size: 3rem;
+}
+
+.contact-page .page-container #form-success-msg p {
+  font-size: 1.5rem;
 }
 
 
@@ -1173,18 +1188,18 @@ body {
 }
 
 .contact-page .page-container .contact-form .name-field{
-  font-size: 0.7rem;
+  font-size: 1.25rem;
   width: 60%;
 }
 
 .contact-page .page-container .contact-form .email-field{
-  font-size: 0.7em;
+  font-size: 1.25rem;
   width: 60%;
 }
 
 .contact-page .page-container .contact-form .msg-field{
   grid-row: span 6;
-  font-size: 0.7rem;
+  font-size: 1rem;
   width: 80%;
 }
 
@@ -1199,6 +1214,21 @@ body {
   border-radius: 1rem;
   background-color: var(--secondary_text_color);
   cursor: pointer;
+}
+
+.contact-page .page-container #form-success-msg {
+  color: white;
+  text-align: center;
+  display: none;
+  padding-top: 10%;
+}
+
+.contact-page .page-container #form-success-msg h3 {
+  font-size: 2.8rem;
+}
+
+.contact-page .page-container #form-success-msg p {
+  font-size: 1.4rem;
 }
 
 }
