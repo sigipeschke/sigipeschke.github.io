@@ -468,7 +468,14 @@ body {
   font-size: 1.2rem;
 }
 
-.projects-page .projects-container .project-R .desc a {
+.projects-page .projects-container .project-R .desc .fa {
+  padding: 0.5rem;
+  font-size: 2rem;
+  width: 2rem;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 10px;
+  border-radius: 50%;
   color: var(--secondary_text_color);
   text-decoration: none;
 }
@@ -514,7 +521,14 @@ body {
   font-size: 1.2rem;
 }
 
-.projects-page .projects-container .project-L .desc a {
+.projects-page .projects-container .project-L .desc .fa {
+  padding: 0.5rem;
+  font-size: 2rem;
+  width: 2rem;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 10px;
+  border-radius: 50%;
   color: var(--secondary_text_color);
   text-decoration: none;
 }
@@ -999,7 +1013,14 @@ body {
   font-size: 1.2rem;
 }
 
-.projects-page .projects-container .project-R .desc a {
+.projects-page .projects-container .project-R .desc .fa {
+  padding: 0.5rem;
+  font-size: 2rem;
+  width: 2rem;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 10px;
+  border-radius: 50%;
   color: var(--secondary_text_color);
   text-decoration: none;
 }
@@ -1037,7 +1058,14 @@ body {
   font-size: 1.2rem;
 }
 
-.projects-page .projects-container .project-L .desc a {
+.projects-page .projects-container .project-L .desc .fa {
+  padding: 0.5rem;
+  font-size: 2rem;
+  width: 2rem;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 10px;
+  border-radius: 50%;
   color: var(--secondary_text_color);
   text-decoration: none;
 }
