@@ -1,0 +1,8 @@
+.resume-page {
+    overflow: hidden;
+  }
+  
+  .resume-page .resume-container {
+    width: 100%;
+    height: calc(100vh - 80px);
+  }

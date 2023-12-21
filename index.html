@@ -4,406 +4,360 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./styles.css">
     <link rel="icon" type="image/x-icon" href="/static/images/account_circle.ico">
     <title>Siegfried Peschke - Portfolio</title>
 
-    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
-
-    <script type="importmap">
-        {
-          "imports": {
-            "three": "https://unpkg.com/three@0.149.0/build/three.module.js"
-          }
-        }
-    </script>
+    <script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css" />
+    <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
 </head>
 
+
 <body class="home-page">
-    <section id="loading-screen">
-        <div id="loader"></div>
+    <!--Navbar-->
+    <div id="nav-placeholder"></div>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script>$(function(){$("#nav-placeholder").load("navbar.html");});</script>
+    
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+     </div>
+
+<!-- Hero -->
+    <section id="home-hero" class="hero">
+        <div class="hero-L">
+            <h1>
+                Hi, I am<br><span>Siegfried Peschke</span>
+                <br><br>
+                Programmer<br>& Physicist
+                <br><br>
+            </h1>
+            <h3>Welcome to my portfolio</h3>
+            <div>
+                <a href="./projects.html">Projects</a>
+                <span><a href="./resume.html">Resume</a></span>
+            </div>
+        </div>
+        <div class="hero-R">
+            <img src="static/images/IMG_5447-ultra.png">
+        </div>
+    </section>
+<!-- Skills -->
+    <section id="home-skills" class="skills">
+        <hr>
+        <h1 data-splitting>My Skills & Stack</h1>
+        <p class="subh3">
+            I have experience in building web-based applications and an understanding of the full software development life cycle. Additionally, I have a strong interest in the power of machine learning and cloud computing and have hands-on experience with neural networks and TensorFlow.
+        </p>
+        <div class="tech-skill-slide">
+            <div class="tech-skill-slide-header">
+                <a id="tech-skill-Larr">
+                    <img class="arrow" src="static/images/left-arrow.svg">
+                </a>
+                <h3 id="tech-skill"></h3>
+                <a id="tech-skill-Rarr">
+                    <img class="arrow" src="static/images/right-arrow.svg">
+                </a>
+            </div>
+            <ul id="tech-skill-list">
+            </ul>
+        </div>
+        <hr>
+<!-- Skills Scroll -->
+<script>
+    ///Data
+    var techSkills = ["Frontend", "Backend", "Libraries", "Tools"]
+    var techSkillDtl = {
+                            Frontend: [
+                                "Figma", 
+                                "Angular", 
+                                "TypeScript", 
+                                "JavaScript",
+                                "HTML", 
+                                "CSS"
+                            ],
+                            Backend: [
+                                "MySQL", 
+                                "Python", 
+                                "Java", 
+                                "SpringBoot", 
+                                "NodeJS", 
+                                "ExpressJS"
+                            ],
+                            Libraries: [
+                                "PrimeNG", 
+                                "RxJS", 
+                                "Bootstrap", 
+                                "ThreeJS", 
+                                "PIXIJS", 
+                                "TensorFlow"
+                            ],
+                            Tools: [
+                                "VS Code", 
+                                "Git", 
+                                "Postman", 
+                                "Vercel", 
+                                "Heroku", 
+                                "Webpack"
+                            ]
+                        }
+    var techSkillImg = {
+                            Frontend: [
+                                "/static/logos/figma.png",
+                                "/static/logos/angular.png",
+                                "/static/logos/typescript.png",
+                                "/static/logos/javascript1.png",
+                                "/static/logos/html5.png",
+                                "/static/logos/css3.png"
+                            ],
+                            Backend: [
+                                "/static/logos/mysql.png",
+                                "/static/logos/python.png",
+                                "/static/logos/java.png",
+                                "/static/logos/springboot.png",
+                                "/static/logos/nodejs.png",
+                                "/static/logos/expressjs.png"
+                            ],
+                            Libraries: [
+                                "/static/logos/primeng.png",
+                                "/static/logos/rxjs.png",
+                                "/static/logos/bootstrap.png",
+                                "/static/logos/threejs.png",
+                                "/static/logos/pixijs.png",
+                                "/static/logos/tensorflow.png"
+                            ],
+                            Tools: [
+                                "/static/logos/vscode.png",
+                                "/static/logos/git.png",
+                                "/static/logos/postman.png",
+                                "/static/logos/vercel.png",
+                                "/static/logos/heroku.png",
+                                "/static/logos/webpack.png"
+                            ]
+                        }
+    let currentSkill = 0
+
+    ///Populate
+    let li = document.createElement("li")
+    let img = document.createElement("img")
+    let p = document.createElement("p")
+
+    const techSkill = document.getElementById('tech-skill')
+    const techSkillLst = document.getElementById("tech-skill-list")
+
+    function populateSkills(direc) {
+        techSkillLst.innerHTML = "" ///Clear
+        techSkill.textContent = techSkills[currentSkill]  
+        for (skill in techSkillDtl[techSkills[currentSkill]]) {
+            let liEle = li.cloneNode(true)
+            if (direc === "R") {
+                liEle.classList.add("li-ani-R")
+            }
+            else if (direc === "L") {
+                liEle.classList.add("li-ani-L")
+            }
+            let pEle = p.cloneNode(true)
+            pEle.textContent = techSkillDtl[techSkills[currentSkill]][skill]
+            let imgEle = img.cloneNode(true)
+            imgEle.classList.add("skill-logo")
+            imgEle.src = techSkillImg[techSkills[currentSkill]][skill]
+            liEle.appendChild(imgEle)
+            liEle.appendChild(pEle)
+            techSkillLst.appendChild(liEle)
+        }
+    }
+
+    populateSkills("R")
+
+    ///Listeners
+    const Larr = document.getElementById("tech-skill-Larr")
+    const Rarr = document.getElementById("tech-skill-Rarr")
+
+    Larr.addEventListener('click', () => {
+        if( currentSkill > 0) {
+            currentSkill -= 1
+        }
+        else {
+            currentSkill = techSkills.length - 1
+        }
+        populateSkills("L")
+    })
+    Rarr.addEventListener('click', () => {
+        if( currentSkill < techSkills.length - 1) {
+            currentSkill += 1
+        }
+        else {
+            currentSkill = 0
+        }
+        populateSkills("R")
+    })
+</script>
     </section>
 
-    <canvas class="webgl"></canvas>
-    <canvas id="trail-canvas"></canvas>
-    <script src="./trail.js"></script>
+    <section id="home-about" class="about">
+        <div class="about-L">
+            <h1 data-splitting>About Siegfried</h1>
+            <img src="static/images/IMG_5455.png">
+        </div>
+        <div class="about-R">
+            <div class="about-imgs">
+                <img id="about-aspiring" src="static/images/about/aspiring.png">
+                <img id="about-improving" src="static/images/about/improving.png">
+            </div>
+            <hr>
+            <div class="about-desc">
+                <h3 id="about-hed"></h3>
+                <p id="about-sub"></p>
+            </div>
+            <hr>
+            <div class="about-imgs">
+                <img id="about-solving" src="static/images/about/solving.png">
+                <img id="about-exercise" src="static/images/about/exercise.png">
+            </div>
+        </div>
+<!-- About Hover Scroll -->
+<script>
+    ///Data
+    const aspiring = document.getElementById("about-aspiring")
+    const improving = document.getElementById("about-improving")
+    const solving = document.getElementById("about-solving")
+    const exercise = document.getElementById("about-exercise")
 
-    <div id="enter-portfolio-billboard-div"></div>
-    <div id="enter-portfolio-div"></div>
+    var aboutHedData = [
+        "Grand Aspirations", 
+        "Always Improving", 
+        "Problem Solving", 
+        "Fueled By Health"
+    ]
+    var aboutSubData = [
+        "My mission is to leave a positive impact in the world by enhancing the lives of those around me. I am confident that my unique background and experiences make me a valuable asset to any team and I am eager to work with a forward-thinking company that values creative problem solving and continuous learning.",
 
-    <script type="module">
-import * as THREE from 'three'
+        "I strongly believe in striving to become the best version of myself that I can. As such, I seek out new opportunities to improve my skills and knowledge within my passions. It is fundamental to my growth as a person and professional to learn something new every day.",
 
-// Loading
-const loadingManager = new THREE.LoadingManager( () => {
-    const loadingScreen = document.getElementById( 'loading-screen' )
-    loadingScreen.classList.add( 'fade-out' )
-    loadingScreen.addEventListener( 'transitionend', onTransitionEnd )
-})
+        "My background in physics has given me a strong foundation in mathematical modeling and problem solving. I approach complex challenges in a methodical and logical manner, to devise efficient solutions.",
 
-function onTransitionEnd( event ) {
-    event.target.remove()
-    
-    const enterBCTA = document.createElement('a')
-    enterBCTA.setAttribute('href', './about.html')
+        "My commitment to a healthy lifestyle is a cornerstone of my overall well-being. I maintain a clean diet and exercise regimen, and push my athleticism in sports I enjoy such as soccer, skiing, and badminton. Healthy body = healthy mind."
+    ]
+    var aboutImgData = [aspiring, improving, solving, exercise]
 
-    const enterBIMG = document.createElement('img')
-    enterBIMG.setAttribute('src', '/static/images/home/billboard.png')
+    let currentAbout = 0
 
-    enterBCTA.appendChild(enterBIMG)
+    ///Populate
+    let div = document.createElement("div")
+    let h3 = document.createElement("h3")
+    const aboutDesc = document.getElementsByClassName("about-desc")[0]
 
-    const enterBDIV = document.getElementById('enter-portfolio-billboard-div')
-    enterBDIV.appendChild(enterBCTA)
-    //
-    const enterCTA = document.createElement('a')
-    enterCTA.setAttribute('href', './about.html')
-
-    const enterIMG = document.createElement('img')
-    enterIMG.setAttribute('src', '/static/images/home/enter-rocket.png')
-
-    enterCTA.appendChild(enterIMG)
-
-    const enterDIV = document.getElementById('enter-portfolio-div')
-    enterDIV.appendChild(enterCTA)
-}
-
-// Textures
-const textureLoader = new THREE.TextureLoader(loadingManager)
-
-const bgTexture = textureLoader.load('/static/images/home/milky-way.jpg')
-
-const sunTexture = textureLoader.load('/static/textures/sun-texture.jpg')
-const sunMap = textureLoader.load('/static/textures/sun-map.jpg')
-
-const mercuryTexture = textureLoader.load('/static/textures/mercury-texture.jpg')
-const mercuryMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
-
-const venusTexture = textureLoader.load('/static/textures/venus-texture.jpg')
-const venusMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
-
-const earthTexture = textureLoader.load('/static/textures/earth-texture.jpg')
-const earthMap = textureLoader.load('/static/textures/earth-map.jpg')
-
-const moonTexture = textureLoader.load('/static/textures/moon-texture.jpg')
-const moonMap = textureLoader.load('/static/textures/moon-map.jpg')
-
-const marsTexture = textureLoader.load('/static/textures/mars-texture.jpg')
-const marsMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
-
-const jupiterTexture = textureLoader.load('/static/textures/jupiter-texture.jpg')
-const jupiterMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
-
-const saturnTexture = textureLoader.load('/static/textures/saturn-texture.jpg')
-const saturnMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
-const saturnRingTexture = textureLoader.load('/static/textures/saturn-ring-texture.png')
-saturnRingTexture.rotation = Math.PI / 2
-
-const uranusTexture = textureLoader.load('/static/textures/uranus-texture.jpg')
-const uranusMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
-
-const neptuneTexture = textureLoader.load('/static/textures/neptune-texture.jpg')
-const neptuneMap = textureLoader.load('/static/textures/planet-surface-map.jpg')
-
-// Canvas
-const canvas = document.querySelector('canvas.webgl')
-
-// Scene
-const scene = new THREE.Scene()
-scene.background = bgTexture
-
-
-// Objects
-const sunGeo = new THREE.SphereGeometry(10, 64, 64)
-const sunLightGeo = new THREE.SphereGeometry(12.5, 64, 64)
-const mercuryGeo = new THREE.SphereGeometry(1.8, 64, 64)
-const venusGeo = new THREE.SphereGeometry(3.8, 64, 64)
-const earthGeo = new THREE.SphereGeometry(4, 64, 64)
-const moonGeo = new THREE.SphereGeometry(1.5, 64, 64)
-const marsGeo = new THREE.SphereGeometry(2.5, 64, 64)
-const jupiterGeo = new THREE.SphereGeometry(8, 64, 64)
-const saturnGeo = new THREE.SphereGeometry(7, 64, 64)
-const saturnRingGeo = new THREE.TorusGeometry(12, 1.4, 2, 64)
-const uranusGeo = new THREE.SphereGeometry(5.2, 64, 64)
-const neptuneGeo = new THREE.SphereGeometry(5, 64, 64)
-
-const asteroid1Geo = new THREE.BufferGeometry()
-const asteroid1Cnt = 2000
-const asteroid2Geo = new THREE.BufferGeometry()
-const asteroid2Cnt = 6000
-
-// Position - Distance
-const sunDist = 0
-const mercuryDist = 20
-const venusDist = 35
-const earthDist = 50
-const marsDist = 80
-const asteroid1Dist = 95
-const jupiterDist = 120
-const saturnDist = 160
-const uranusDist = 210
-const neptuneDist = 240
-const asteroid2Dist = 270
-
-
-// Materials
-
-const sunMat = new THREE.MeshStandardMaterial()
-sunMat.map = sunTexture
-sunMat.normalMap = sunMap
-
-const sunShaderVert = `
-    varying vec3 vertexNormal;
-
-    void main() {
-        vertexNormal = normalize(normalMatrix * normal);
-
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    function selectImg() {
+        aboutImgData[currentAbout].style.filter = "invert(70%) sepia(19%) saturate(977%) hue-rotate(71deg) brightness(93%) contrast(88%)";
     }
-`
-const sunShaderFrag = `
-    varying vec3 vertexNormal;
-
-    void main() {
-        float intensity = pow(0.5 - dot(vertexNormal, vec3(0.0, 0.0, 1.0)), 2.0);
-
-        gl_FragColor = vec4(1.0, 0.5, 0.2, 1.0) * intensity;
+    function clearImg() {
+        aboutImgData[currentAbout].style.filter = "grayscale(1) invert(1) brightness(2)";
     }
-`
-const sunLightMat = new THREE.ShaderMaterial({
-    vertexShader: sunShaderVert,
-    fragmentShader: sunShaderFrag,
-    blending: THREE.AdditiveBlending,
-    side: THREE.BackSide
-})
 
-const mercuryMat = new THREE.MeshStandardMaterial()
-mercuryMat.map = mercuryTexture
-mercuryMat.normalMap = mercuryMap
+    function populateAbout() {
+        aboutDesc.innerHTML = ""
+        let divEle = div.cloneNode(true)
+        let h3Ele = h3.cloneNode(true)
+        let pEle = p.cloneNode(true)
+        h3Ele.id = "about-hed"
+        pEle.id = "about-sub"
+        h3Ele.innerHTML = aboutHedData[currentAbout]
+        pEle.textContent = aboutSubData[currentAbout]
+        divEle.appendChild(h3Ele)
+        divEle.appendChild(pEle)
+        aboutDesc.appendChild(divEle)
+        selectImg()
+    }
 
-const venusMat = new THREE.MeshStandardMaterial()
-venusMat.map = venusTexture
-venusMat.normalMap = venusMap
+    populateAbout()
 
-const earthMat = new THREE.MeshStandardMaterial()
-earthMat.map = earthTexture
-earthMat.normalMap = earthMap
+    ///Listeners
+    aspiring.addEventListener('mouseover', () => {
+        clearImg()
+        currentAbout = 0
+        populateAbout()
+    })
 
-const moonMat = new THREE.MeshStandardMaterial()
-moonMat.map = moonTexture
-moonMat.normalMap = moonMap
+    improving.addEventListener('mouseover', () => {
+        clearImg()
+        currentAbout = 1
+        populateAbout()
+    })
 
-const marsMat = new THREE.MeshStandardMaterial()
-marsMat.map = marsTexture
-marsMat.normalMap = marsMap
+    solving.addEventListener('mouseover', () => {
+        clearImg()
+        currentAbout = 2
+        populateAbout()
+    })
 
-const jupiterMat = new THREE.MeshStandardMaterial()
-jupiterMat.map = jupiterTexture
-jupiterMat.normalMap = jupiterMap
+    exercise.addEventListener('mouseover', () => {
+        clearImg()
+        currentAbout = 3
+        populateAbout()
+    })
 
-const saturnMat = new THREE.MeshStandardMaterial()
-saturnMat.map = saturnTexture
-saturnMat.normalMap = saturnMap
+</script>
+<!-- IDEK An attempt at ScrollLock with Box detection -->
+<script>
+    var intersectionOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5
+    }
 
-const saturnRingMat = new THREE.MeshStandardMaterial()
-saturnRingMat.map = saturnRingTexture
+    function intersectionCallback(entries, observer) {
+    entries.forEach(entry => {
+        if (entry.intersectionRatio >= 0.5) {
+        console.log("Fully visible!");
+        } else {
+        console.log("Not fully visible!");
+        }
+    });
+    }
 
-const uranusMat = new THREE.MeshStandardMaterial()
-uranusMat.map = uranusTexture
-uranusMat.normalMap = uranusMap
+    var observer = new IntersectionObserver(intersectionCallback, intersectionOptions);
 
-const neptuneMat = new THREE.MeshStandardMaterial()
-neptuneMat.map = neptuneTexture
-neptuneMat.normalMap = neptuneMap
+    var target = document.getElementById("home-about");
+    ///console.log(target)
+    ///observer.observe(target);
+</script>
+<!--  An Attempt at ScrollOut/Splitting with CDN Scrollout/Splitting -->
+<script>
+    Splitting()
+    ScrollOut({
+        targets: ["[data-splitting]"],
+        threshold: 0.5,
+        once: false,
+        cssProps: {
+            viewportY: true,
+            visibleY: true
+        }
+    });
+</script>
+    </section>
 
-const asteroidMat = new THREE.PointsMaterial({
-    size: 0.05,
-    color: 0xb5b5b5
-})
-
-// Mesh
-const sun = new THREE.Mesh(sunGeo, sunMat)
-sun.position.set(sunDist, 0, 0)
-scene.add(sun)
-
-const sunLight = new THREE.Mesh(sunLightGeo, sunLightMat)
-sunLight.position.set(sunDist, 0, 0)
-scene.add(sunLight)
-
-const mercury = new THREE.Mesh(mercuryGeo, mercuryMat)
-mercury.position.set(mercuryDist, 0, 0)
-scene.add(mercury)
-
-const venus = new THREE.Mesh(venusGeo, venusMat)
-venus.position.set(venusDist, 0, 0)
-scene.add(venus)
-
-const earth = new THREE.Mesh(earthGeo, earthMat)
-earth.position.set(earthDist, 0, 0)
-scene.add(earth)
-
-const moon = new THREE.Mesh(moonGeo, moonMat)
-moon.position.set(earthDist + 6, 0, 0)
-scene.add(moon)
-
-const mars = new THREE.Mesh(marsGeo, marsMat)
-mars.position.set(marsDist, 0, 0)
-scene.add(mars)
-
-const jupiter = new THREE.Mesh(jupiterGeo, jupiterMat)
-jupiter.position.set(jupiterDist, 0, 0)
-scene.add(jupiter)
-
-const saturn = new THREE.Mesh(saturnGeo, saturnMat)
-saturn.position.set(saturnDist, 0, 0)
-scene.add(saturn)
-
-const saturnRing = new THREE.Mesh(saturnRingGeo, saturnRingMat)
-saturnRing.position.set(saturnDist, 0, 0)
-saturnRing.rotateX(110 * Math.PI / 180)
-scene.add(saturnRing)
-
-const uranus = new THREE.Mesh(uranusGeo, uranusMat)
-uranus.position.set(uranusDist, 0, 0)
-scene.add(uranus)
-
-const neptune = new THREE.Mesh(neptuneGeo, neptuneMat)
-neptune.position.set(neptuneDist, 0, 0)
-scene.add(neptune)
-
-const asteroid1PosArray = new Float32Array(asteroid1Cnt * 3)
-for (let i = 0; i < asteroid1Cnt * 3; i = i+3) {
-    let asteroid1Angle = 2*Math.PI*Math.random()
-    asteroid1PosArray[i] = asteroid1Dist * Math.cos(asteroid1Angle) + 4*Math.random()
-    asteroid1PosArray[i+1] = 2*Math.random()
-    asteroid1PosArray[i+2] = asteroid1Dist * -Math.sin(asteroid1Angle) + 4*Math.random()
-}
-asteroid1Geo.setAttribute('position', new THREE.BufferAttribute(asteroid1PosArray, 3))
-const asteroids1 = new THREE.Points(asteroid1Geo, asteroidMat)
-scene.add(asteroids1)
-
-const asteroid2PosArray = new Float32Array(asteroid2Cnt * 3)
-for (let i = 0; i < asteroid2Cnt * 3; i = i+3) {
-    let asteroid2Angle = 2*Math.PI*Math.random()
-    asteroid2PosArray[i] = asteroid2Dist * Math.cos(asteroid2Angle) + 30*Math.random()
-    asteroid2PosArray[i+1] = 10*Math.random()
-    asteroid2PosArray[i+2] = asteroid2Dist * -Math.sin(asteroid2Angle) + 30*Math.random()
-}
-asteroid2Geo.setAttribute('position', new THREE.BufferAttribute(asteroid2PosArray, 3))
-const asteroids2 = new THREE.Points(asteroid2Geo, asteroidMat)
-scene.add(asteroids2)
-
-
-// Lights
-
-const light = new THREE.AmbientLight(0x404040, 4)
-scene.add(light)
-
-/**
- * Sizes
- */
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-}
-
-window.addEventListener('resize', () =>
-{
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
-
-/**
- * Camera
- */
-// Base camera
-const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 1, 1000)
-if (window.innerWidth < 500) {
-    camera.fov = 90
-    camera.updateProjectionMatrix()
-}
-camera.position.set(0, 60, 250)
-camera.lookAt(0, 0, 0)
-scene.add(camera)
-
-/**
- * Renderer
- */
-const renderer = new THREE.WebGLRenderer({
-    canvas: canvas
-})
-renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-/**
- * Animate
- */
-
-let thetaMe = 0.0
-let thetaV = 3.5
-let thetaE = 1.0
-let thetaMo = 0.0
-let phiMo = 0.0
-let thetaMa = 1.8
-let thetaJ = 6.0
-let thetaS = 3.5
-let thetaU = 0.0
-let thetaN = 5.8
-
-const clock = new THREE.Clock()
-
-const tick = () =>
-{
-    const elapsedTime = clock.getElapsedTime()
-
-    // Update objects
-    sun.rotation.y = 0.5 * elapsedTime
-    mercury.rotation.y = 1.5 * elapsedTime
-    venus.rotation.y = 4 * elapsedTime
-    earth.rotation.y = 6 * elapsedTime
-    mars.rotation.y = 4 * elapsedTime
-    jupiter.rotation.y = 1.5 * elapsedTime
-    saturn.rotation.y = 2.5 * elapsedTime
-    uranus.rotation.y = 2.5 * elapsedTime
-    neptune.rotation.y = 2.5 * elapsedTime
-
-    thetaMe += 0.005 *2*Math.PI
-    thetaV += 0.0025 *2*Math.PI
-    thetaE += 0.002 *2*Math.PI
-    thetaMo += 0.004 *2*Math.PI
-    phiMo += 0.002 *2*Math.PI
-    thetaMa += 0.001 *2*Math.PI
-    thetaJ += 0.0007 *2*Math.PI
-    thetaS += 0.0006 *2*Math.PI
-    thetaU += 0.0003 *2*Math.PI
-    thetaN += 0.0002 *2*Math.PI
-    
-    mercury.position.set(mercuryDist * Math.cos(thetaMe), 0, -mercuryDist * Math.sin(thetaMe))
-    venus.position.set(venusDist * Math.cos(thetaV), 0, -venusDist * Math.sin(thetaV))
-    earth.position.set(earthDist * Math.cos(thetaE), 0, -earthDist * Math.sin(thetaE))
-    moon.position.set(earthDist * Math.cos(thetaE) + (6 * Math.cos(thetaMo)), 6 * Math.sin(phiMo), -earthDist * Math.sin(thetaE) + (-6 * Math.sin(thetaMo)))
-    mars.position.set(marsDist * Math.cos(thetaMa), 0, -marsDist * Math.sin(thetaMa))
-    jupiter.position.set(jupiterDist * Math.cos(thetaJ), 0, -jupiterDist * Math.sin(thetaJ))
-    saturn.position.set(saturnDist * Math.cos(thetaS), 0, -saturnDist * Math.sin(thetaS))
-    saturnRing.position.set(saturnDist * Math.cos(thetaS), 0, -saturnDist * Math.sin(thetaS))
-    uranus.position.set(uranusDist * Math.cos(thetaU), 0, -uranusDist * Math.sin(thetaU))
-    neptune.position.set(neptuneDist * Math.cos(thetaN), 0, -neptuneDist * Math.sin(thetaN))
-
-    // Render
-    renderer.render(scene, camera)
-
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
-}
-
-tick()
-    </script>
+<div id="footer-placeholder"></div>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script>$(function(){$("#footer-placeholder").load("footer.html");});</script>
 </body>

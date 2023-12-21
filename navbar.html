@@ -1,9 +1,11 @@
-<div class="navbar">
+<div class="navbar" style="z-index: 999;">
     <div class="container">
-        <a class="logo" href="./index.html">Siegfried <span>Peschke</span></a>
+        <a id="nav-logo" class="logo" href="./index.html">
+            <img src="/static/images/sp-logo2.svg">
+            <span>Siegfried Peschke</span>
+        </a>
         <div>
             <img id="mobile-cta" class="mobile-menu-open" src="/static/images/menu-icon-open.svg" alt="Open Navigation Menu">
-            <p class="mobile-menu-txt">Menu</p>
         </div>
         <nav>
             <div>
@@ -11,17 +13,16 @@
             </div>
 
             <ul id="navbar-items-list" class="primary-nav">
-                <li><a id="nav-home" href="./index.html">Home</a></li>
-                <li><a id="nav-about" href="./about.html">About</a></li>
-                <li><a id="nav-skills" href="./skills.html">Skills</a></li>
-                <li><a id="nav-projects" href="./projects.html">Projects</a></li>
-                <li><a id="nav-resume" href="./resume.html">Resume</a></li>
-                <li><a id="nav-contact" href="./contact.html">Contact</a></li>
+                <li class="ctaEle"><a id="nav-index" href="./index.html">Home</a></li>
+                <li class="ctaEle"><a id="nav-projects" href="./projects.html">Projects</a></li>
+                <li class="ctaEle"><a id="nav-resume" href="./resume.html">Resume</a></li>
+                <li class="ctaEle"><a id="nav-contact" href="./contact.html">Contact</a></li>
             </ul>
         </nav>
     </div>
 </div>
 
+<!-- Mobile Menu -->
 <script>
 
     const mobileBtn = document.getElementById('mobile-cta')
@@ -38,6 +39,7 @@
 
 </script>
 
+<!-- Active Tab -->
 <script>
 
     const url = document.URL
@@ -48,6 +50,30 @@
 
 </script>
 
+<!-- Bounce Animation -->
+<script>
+    const ctaEle = document.getElementsByClassName("ctaEle")
+
+    for (i = 0; i < ctaEle.length; i++) {
+        ctaEle[i].addEventListener("mouseover", (event) => {
+            event.target.classList.add("cta-animated")
+        })
+        ctaEle[i].addEventListener("mouseout", (event) => {
+            event.target.classList.remove("cta-animated")
+        })
+    }
+</script>
+
+<!-- Logo Animation -->
+<script>
+    const logoEle = document.getElementById("nav-logo")
+    logoEle.addEventListener("mouseover", (event) => {
+        event.target.classList.add("logo-animated")
+    })
+    logoEle.addEventListener("mouseout", (event) => {
+        event.target.classList.remove("logo-animated")
+    })
+</script>
 
 <!-- NavBar 
 
