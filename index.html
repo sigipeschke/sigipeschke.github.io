@@ -289,33 +289,42 @@
         aboutDesc.appendChild(divEle)
         selectImg()
     }
-
     populateAbout()
 
+    function executeChange(e) {
+        if (e.target.id == "about-aspiring" && currentAbout != 0) {
+            clearImg()
+            currentAbout=0; 
+            populateAbout()
+        }
+        else if (e.target.id == "about-improving" && currentAbout != 1) {
+            clearImg()
+            currentAbout=1; 
+            populateAbout()
+        }
+        else if (e.target.id == "about-solving" && currentAbout != 2) {
+            clearImg()
+            currentAbout=2; 
+            populateAbout()
+        }
+        else if (e.target.id == "about-exercise" && currentAbout != 3) {
+            clearImg()
+            currentAbout=3; 
+            populateAbout()
+        }
+        
+    }
+
     ///Listeners
-    aspiring.addEventListener('mouseover', () => {
-        clearImg()
-        currentAbout = 0
-        populateAbout()
-    })
 
-    improving.addEventListener('mouseover', () => {
-        clearImg()
-        currentAbout = 1
-        populateAbout()
-    })
-
-    solving.addEventListener('mouseover', () => {
-        clearImg()
-        currentAbout = 2
-        populateAbout()
-    })
-
-    exercise.addEventListener('mouseover', () => {
-        clearImg()
-        currentAbout = 3
-        populateAbout()
-    })
+    aspiring.addEventListener('mouseover', executeChange)
+    aspiring.addEventListener('click', executeChange)
+    improving.addEventListener('mouseover', executeChange)
+    improving.addEventListener('click', executeChange)
+    solving.addEventListener('mouseover', executeChange)
+    solving.addEventListener('click', executeChange)
+    exercise.addEventListener('mouseover', executeChange)
+    exercise.addEventListener('click', executeChange)
 
 </script>
 <!-- IDEK An attempt at ScrollLock with Box detection -->

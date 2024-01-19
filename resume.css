@@ -6,3 +6,11 @@
     width: 100%;
     height: calc(100vh - 80px);
   }
+
+  @media (max-width: 1001px) {
+    
+    .resume-page .resume-container {
+      height: 100vh;
+    }
+
+  }
