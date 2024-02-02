@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" target="_blank">
     <link rel="icon" type="image/x-icon" href="/static/images/account_circle.ico">
     <title>Siegfried Peschke - Portfolio</title>
 
@@ -327,31 +328,8 @@
     exercise.addEventListener('click', executeChange)
 
 </script>
-<!-- IDEK An attempt at ScrollLock with Box detection -->
-<script>
-    var intersectionOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.5
-    }
 
-    function intersectionCallback(entries, observer) {
-    entries.forEach(entry => {
-        if (entry.intersectionRatio >= 0.5) {
-        console.log("Fully visible!");
-        } else {
-        console.log("Not fully visible!");
-        }
-    });
-    }
-
-    var observer = new IntersectionObserver(intersectionCallback, intersectionOptions);
-
-    var target = document.getElementById("home-about");
-    ///console.log(target)
-    ///observer.observe(target);
-</script>
-<!--  An Attempt at ScrollOut/Splitting with CDN Scrollout/Splitting -->
+<!-- CDN Scrollout/Splitting -->
 <script>
     Splitting()
     ScrollOut({
@@ -367,6 +345,5 @@
     </section>
 
 <div id="footer-placeholder"></div>
-<script src="//code.jquery.com/jquery.min.js"></script>
 <script>$(function(){$("#footer-placeholder").load("footer.html");});</script>
 </body>
