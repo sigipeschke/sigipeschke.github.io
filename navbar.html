@@ -41,13 +41,14 @@
 
 <!-- Active Tab -->
 <script>
-
     const url = document.URL
     const urlSplit = url.split('/')
-    const activePage = urlSplit[urlSplit.length - 1].split('.')[0]
+    var activePage = urlSplit[urlSplit.length - 1].split('.')[0]
+    if (activePage == '') {
+        activePage = 'index'
+    }
     activeId = 'nav-'.concat(activePage)
     document.getElementById(activeId).classList.add('nav-active-page')
-
 </script>
 
 <!-- Bounce Animation -->
