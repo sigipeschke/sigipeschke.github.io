@@ -550,6 +550,41 @@ h1.splitting[data-scroll="in"] .char {
   height: auto;
 }
 
+#home-skills .skills-current-stack-container {
+    width: 100vw;
+
+  }
+
+#home-skills .skills-current-stack {
+    list-style-type: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding-left: 10%;
+    margin-top: 2rem;
+}
+
+#home-skills .skills-current-stack li {
+    display: inline-flex;
+    margin: 0px 16px;
+}
+
+#home-skills .skills-current-stack li div {
+    display: inline-block;
+    margin: 0px 24px;
+}
+
+#home-skills .skills-current-stack li div p {
+    text-align: center;
+}
+
+#home-skills .skills-current-stack li div img {
+    height: 3.5rem;
+    width: 100%;
+    object-fit: contain;
+}
+
 #home-skills .subh3 {
   width: 80%;
   padding-left: 12.5%;
@@ -618,6 +653,8 @@ h1.splitting[data-scroll="in"] .char {
 #home-skills .tech-skill-slide #tech-skill-list li img {
   height: 3.5rem;
 }
+
+
 
 @keyframes logoSkillAni {
   25%{
@@ -829,94 +866,127 @@ h1.splitting[data-scroll="in"] .char {
 
 @media (max-width: 1001px) {
 
-  
-  #home-hero .hero-L {
-    width: 100%;
-  }
-  
-  
-  #home-hero .hero-R {
-    display: none;
-  }
+
+    #home-hero .hero-L {
+        width: 100%;
+    }
+    
+    
+    #home-hero .hero-R {
+        display: none;
+    }
+
+    #home-skills .skills-current-stack-container {
+        width: 100vw;
+
+    }
+
+    #home-skills .skills-current-stack {
+        list-style-type: none;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        padding-left: 10%;
+        margin-top: 2rem;
+    }
+
+    #home-skills .skills-current-stack li {
+        display: inline-flex;
+        margin: 0px 16px;
+    }
+
+    #home-skills .skills-current-stack li div {
+        display: inline-block;
+        margin: 0px 24px;
+    }
+
+    #home-skills .skills-current-stack li div p {
+        text-align: center;
+    }
+
+    #home-skills .skills-current-stack li div img {
+        height: 3.5rem;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    #home-skills .tech-skill-slide #tech-skill-list {
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: repeat(3, 33%);
+        width: 80%;
+        padding-left: 10%;
+        margin-top: 2rem;
+        overflow: hidden;
+    }
+
+    #home-skills .tech-skill-slide #tech-skill-list p {
+        text-align: center;
+    }
 
 
-
-  #home-skills .tech-skill-slide #tech-skill-list {
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: repeat(3, 33%);
-    width: 80%;
-    padding-left: 10%;
-    margin-top: 2rem;
-    overflow: hidden;
-  }
-
-  #home-skills .tech-skill-slide #tech-skill-list p {
-    text-align: center;
-  }
-
-
-  #home-about {
-    display: inline-block;
-  }
-  
-  #home-about .about-L {
-    width: 100%;
-    height: auto;
-  }
-  
-  #home-about .about-L img {
-    display: none;
-  }
-  
-  #home-about .about-R {
-    width: 100%;
-    left: 0%;
-    top: 8rem;
-  }
-  
-  #home-about .about-R div {
-    width: 100%;
-    height: auto;
-  }
-  
-  #home-about .about-R hr {
-    display: none;
-  }
-  
-  #home-about .about-R .about-desc {
-    height: 20vh;
-  }
-  
-  #home-about .about-R .about-imgs {
-    display: inline-flex;
-    justify-content: space-evenly;
-    height: 30vh;
-  }
-  
-  #home-about .about-R img {
-    height: 60%;
-    filter: grayscale(1) invert(1) brightness(2);
-  }
-  
- 
-  
-  #home-about .about-R img:hover {
-    animation: aboutRImgsAni 0.7s ease-out 0.2s 1 normal forwards;
-  }
-  
-  
-  #home-about .about-R #about-hed {
-    margin-top: 0;
-    color: var(--secondary_text_color);
-    text-transform: uppercase;
-    animation: homeAboutDesc 0.3s ease-out 0s 1 normal forwards;
-  }
-  #home-about .about-R #about-sub {
-    width: 90%;
-    padding-left: 5%;
-    animation: homeAboutDesc 0.3s ease-out 0s 1 normal forwards;
-  }
+    #home-about {
+        display: inline-block;
+    }
+    
+    #home-about .about-L {
+        width: 100%;
+        height: auto;
+    }
+    
+    #home-about .about-L img {
+        display: none;
+    }
+    
+    #home-about .about-R {
+        width: 100%;
+        left: 0%;
+        top: 8rem;
+    }
+    
+    #home-about .about-R div {
+        width: 100%;
+        height: auto;
+    }
+    
+    #home-about .about-R hr {
+        display: none;
+    }
+    
+    #home-about .about-R .about-desc {
+        height: 20vh;
+    }
+    
+    #home-about .about-R .about-imgs {
+        display: inline-flex;
+        justify-content: space-evenly;
+        height: 30vh;
+    }
+    
+    #home-about .about-R img {
+        height: 60%;
+        filter: grayscale(1) invert(1) brightness(2);
+    }
+    
+    
+    
+    #home-about .about-R img:hover {
+        animation: aboutRImgsAni 0.7s ease-out 0.2s 1 normal forwards;
+    }
+    
+    
+    #home-about .about-R #about-hed {
+        margin-top: 0;
+        color: var(--secondary_text_color);
+        text-transform: uppercase;
+        animation: homeAboutDesc 0.3s ease-out 0s 1 normal forwards;
+    }
+    #home-about .about-R #about-sub {
+        width: 90%;
+        padding-left: 5%;
+        animation: homeAboutDesc 0.3s ease-out 0s 1 normal forwards;
+    }
 
 
 }
